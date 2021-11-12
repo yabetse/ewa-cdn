@@ -73,7 +73,7 @@ function sendOTP(callback) {
 // Submit OTP and login
 function submitOTP() {
     let OTPCode = $('input#otp_code').val();
-    let phoneNr = $('input#phone_number').val();
+    let phoneNr = "66".concat($('#phone_number').val());
 
     $('#kn-loading-spinner').show();
     disableOTPEntryClickEvents();
