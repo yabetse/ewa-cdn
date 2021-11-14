@@ -66,7 +66,7 @@ function sendOTP(callback) {
 
         $('#kn-loading-spinner').hide();
 
-        if (callback) callback();
+        if (callback) callback(response);
     });
 }
 
@@ -118,7 +118,7 @@ function showOTPSentAlert() {
 }
 
 // Validate OTP phone number
-$('#otp-input-form').validate({
+var $phoneNumValidator = $('#otp-input-form').validate({
     rules: {
         phone_number: {
             required: true,
@@ -136,9 +136,17 @@ $('#otp-input-form').validate({
 
         disablePhonenumberInputClickEvents();
 
-        sendOTP(() => {
-            enablePhonenubmerInputClickEvents();
-            showOTPEntryView()
+        sendOTP((response) => {
+            const res = JSON.parse(response);
+            if (res && !res.success) {
+                errors = {
+                    phone_number: res.details
+                };
+                $phoneNumValidator.showErrors(errors);
+            } else {
+                enablePhonenubmerInputClickEvents();
+                showOTPEntryView()
+            }
         });
     },
 });
