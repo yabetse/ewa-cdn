@@ -1,47 +1,3 @@
-// transactions
-$(document).on('knack-view-render.view_47', function (event, view, data) {
-    console.log("Transaction view loaded");
-    createTransactionList();
-
-    $('.transaction-item .btn-toggle').click(function () {
-        let ti = $(this).parents('.transaction-item');
-
-        $(this).toggleClass('selected')
-        $(ti).find('.ti-contnet').toggleClass('hidden-detail');
-
-        $('html, body').animate({
-            scrollTop: $(ti).offset().top + ($(ti).height() / 3)
-        }, 1000);
-    });
-
-    $('#transaction-search-bar input').keyup(function () {
-        let searchBar = $(this).parents('.custom-search-bar');
-        let searchInputCont = $(searchBar).find('.search-input-cont');
-        let clearInput = $(searchBar).find('#clear');
-        let searchString = $(this).val().trim();
-
-        if (searchString !== "") {
-            $(clearInput).removeClass('hidden');
-
-            if (!$(searchInputCont).hasClass('search-offset'))
-                $(searchInputCont).addClass('search-offset');
-
-            searchTransactions(searchString);
-
-        } else {
-            resetSearchBar();
-        }
-    });
-
-    $('#transaction-search-bar #clear').click(function () {
-        let searchBar = $(this).parents('.custom-search-bar');
-        let input = $(searchBar).find('input.form-input');
-
-        $(input).val('');
-        resetSearchBar();
-    });
-});
-
 // Searchs transaction list
 function searchTransactions(queryString) {
     $('.transaction-item').each(function () {
@@ -210,3 +166,45 @@ function createTransactionList() {
         transactionsCont.append(transactionTemplate);
     });
 }
+
+$('.transaction-item .btn-toggle').click(function () {
+    let ti = $(this).parents('.transaction-item');
+
+    $(this).toggleClass('selected')
+    $(ti).find('.ti-contnet').toggleClass('hidden-detail');
+
+    $('html, body').animate({
+        scrollTop: $(ti).offset().top + ($(ti).height() / 3)
+    }, 1000);
+});
+
+$('#transaction-search-bar input').keyup(function () {
+    let searchBar = $(this).parents('.custom-search-bar');
+    let searchInputCont = $(searchBar).find('.search-input-cont');
+    let clearInput = $(searchBar).find('#clear');
+    let searchString = $(this).val().trim();
+
+    if (searchString !== "") {
+        $(clearInput).removeClass('hidden');
+
+        if (!$(searchInputCont).hasClass('search-offset'))
+            $(searchInputCont).addClass('search-offset');
+
+        searchTransactions(searchString);
+
+    } else {
+        resetSearchBar();
+    }
+});
+
+$('#transaction-search-bar #clear').click(function () {
+    let searchBar = $(this).parents('.custom-search-bar');
+    let input = $(searchBar).find('input.form-input');
+
+    $(input).val('');
+    resetSearchBar();
+});
+
+
+
+createTransactionList();
