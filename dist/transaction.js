@@ -167,44 +167,50 @@ function createTransactionList() {
     });
 }
 
-$('.transaction-item .btn-toggle').click(function () {
-    let ti = $(this).parents('.transaction-item');
+// Setup event handlers
+function setupEventHandlers() {
+    $('.transaction-item .btn-toggle').click(function () {
+        let ti = $(this).parents('.transaction-item');
 
-    $(this).toggleClass('selected')
-    $(ti).find('.ti-contnet').toggleClass('hidden-detail');
+        $(this).toggleClass('selected')
+        $(ti).find('.ti-contnet').toggleClass('hidden-detail');
 
-    $('html, body').animate({
-        scrollTop: $(ti).offset().top + ($(ti).height() / 3)
-    }, 1000);
-});
+        $('html, body').animate({
+            scrollTop: $(ti).offset().top + ($(ti).height() / 3)
+        }, 1000);
+    });
 
-$('#transaction-search-bar input').keyup(function () {
-    let searchBar = $(this).parents('.custom-search-bar');
-    let searchInputCont = $(searchBar).find('.search-input-cont');
-    let clearInput = $(searchBar).find('#clear');
-    let searchString = $(this).val().trim();
+    $('#transaction-search-bar input').keyup(function () {
+        let searchBar = $(this).parents('.custom-search-bar');
+        let searchInputCont = $(searchBar).find('.search-input-cont');
+        let clearInput = $(searchBar).find('#clear');
+        let searchString = $(this).val().trim();
 
-    if (searchString !== "") {
-        $(clearInput).removeClass('hidden');
+        if (searchString !== "") {
+            $(clearInput).removeClass('hidden');
 
-        if (!$(searchInputCont).hasClass('search-offset'))
-            $(searchInputCont).addClass('search-offset');
+            if (!$(searchInputCont).hasClass('search-offset'))
+                $(searchInputCont).addClass('search-offset');
 
-        searchTransactions(searchString);
+            searchTransactions(searchString);
 
-    } else {
+        } else {
+            resetSearchBar();
+        }
+    });
+
+    $('#transaction-search-bar #clear').click(function () {
+        let searchBar = $(this).parents('.custom-search-bar');
+        let input = $(searchBar).find('input.form-input');
+
+        $(input).val('');
         resetSearchBar();
-    }
-});
+    });
 
-$('#transaction-search-bar #clear').click(function () {
-    let searchBar = $(this).parents('.custom-search-bar');
-    let input = $(searchBar).find('input.form-input');
+}
 
-    $(input).val('');
-    resetSearchBar();
-});
-
-
-
-createTransactionList();
+// Main method: creates transaction list  and calls the event handlers
+function loadCustomTrasactionView() {
+    createTransactionList();
+    setupEventHandlers();
+}
