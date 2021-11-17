@@ -40,7 +40,7 @@ function enableOTPEntryClickEvents() {
 // Show OTP code entry after phone number is validated
 function showOTPEntryView() {
     $('.view-group-2').hide();
-    $('.view_45 .form-cont').removeClass('hidden-block');
+    $('.view_72 .form-cont').removeClass('hidden-block');
 
     $('.otp-back-cont').removeClass('hidden');
 
