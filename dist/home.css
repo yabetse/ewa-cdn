@@ -42,7 +42,7 @@
   align-items: center;
 }
 
-.bank-account-item.divider {
+.bank-account-item.bordered {
   border-top: 1px solid #eee;
 }
 
