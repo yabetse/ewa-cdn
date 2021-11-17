@@ -1,0 +1,49 @@
+#view_56 .kn-detail-body {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #ffffff;
+  border-radius: 4px;
+  margin: 4px 0px;
+}
+
+#view_56 .kn-detail-body span span {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  color: #263238;
+}
+
+#view_56 .kn-detail-label {
+  background-color: transparent;
+  padding: 5px 0;
+  margin-top: 15px;
+}
+
+#view_56 .kn-detail-label span {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 10px;
+  color: #797575;
+}
+
+#view_57 .kn-log-out {
+  display: block;
+  text-decoration: none;
+  padding: 16px 8px;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.1)),
+    #ffffff;
+  border-radius: 4px;
+  margin: 16px 0px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  color: #444444;
+  text-align: center;
+}
