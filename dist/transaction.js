@@ -36,7 +36,7 @@ function getStatusClass(status) {
 function setStatusIcon(status) {
     switch (status) {
         case "Paid Out":
-            return `<span class="material-icons status-icon status-payed">done_outline</span>`;
+            return `<span class="material-icons status-icon status-payed">done</span>`;
         case "In Progress":
             return `<span class="material-icons status-icon status-pending">hourglass_bottom</span>`;
         default:
