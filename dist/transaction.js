@@ -74,7 +74,7 @@ function parseTransactions() {
 
 // Parses and returns formatted date
 function formatDate(stringDate) {
-    let dateArray = StringDate.split('/');
+    let dateArray = stringDate.split('/');
     let date = new Date(+dateArray[2], dateArray[1] - 1, +dateArray[0]);
 
     let year = date.getFullYear();
