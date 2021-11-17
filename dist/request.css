@@ -1,20 +1,20 @@
 /* Request Form */
-.view_55 {
+.view_60 {
   margin-top: 24px;
 }
 
-.view_55 form {
+.view_60 form {
   margin-top: 24px;
 }
 
-.view_55 form .kn-input label {
+.view_60 form .kn-input label {
   font-family: "Inter" !important;
   font-weight: 600;
   font-size: 14px !important;
   color: #222222 !important;
 }
 
-.view_55 form .kn-input .input {
+.view_60 form .kn-input .input {
   width: 100%;
   margin: auto;
   box-shadow: none !important;
@@ -32,7 +32,7 @@
   border: 2px solid #f4f4f4 !important;
 }
 
-.view_55 form .kn-input .kn-textarea {
+.view_60 form .kn-input .kn-textarea {
   width: 100%;
   margin: auto;
   box-shadow: none !important;
@@ -50,7 +50,7 @@
   resize: vertical;
 }
 
-.view_55 form a.chzn-single {
+.view_60 form a.chzn-single {
   width: 100%;
   margin: auto;
   box-shadow: none !important;
@@ -68,7 +68,7 @@
   border: 2px solid #f4f4f4 !important;
 }
 
-.view_55 form .kn-button {
+.view_60 form .kn-button {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
@@ -89,7 +89,7 @@
   background: #8e4842 !important;
 }
 
-.view_55 form .kn-button:hover {
+.view_60 form .kn-button:hover {
   background: #663530 !important;
 }
 
@@ -99,12 +99,12 @@
   color: #7a6e6e !important;
 }
 
-.view_55 form .kn-input .kn-radio {
+.view_60 form .kn-input .kn-radio {
   margin-top: 8px;
   width: 100%;
 }
 
-.view_55 form .kn-input .kn-radio .control {
+.view_60 form .kn-input .kn-radio .control {
   width: 100%;
   margin: auto auto 8px auto;
   padding: 12px;
@@ -114,7 +114,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.view_55 form .kn-input .kn-radio .control.selected {
+.view_60 form .kn-input .kn-radio .control.selected {
   background: linear-gradient(
       0deg,
       rgba(0, 70, 133, 0.09),
@@ -124,20 +124,20 @@
   border: 1.5px solid rgba(38, 50, 56, 0.1);
 }
 
-.view_55 form .kn-input .kn-radio .option.radio {
+.view_60 form .kn-input .kn-radio .option.radio {
   width: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
 }
 
-.view_55 form .kn-input .kn-radio .option.radio div {
+.view_60 form .kn-input .kn-radio .option.radio div {
   flex-grow: 1;
   display: flex;
   margin-left: 12px;
 }
 
-.view_55 form .kn-input .kn-radio .widthdrawl-radio {
+.view_60 form .kn-input .kn-radio .widthdrawl-radio {
   width: 100%;
   margin: auto;
   display: flex;
@@ -146,7 +146,7 @@
   top: -3px;
 }
 
-.view_55 form .kn-input .kn-radio .widthdrawl-radio .wr-title {
+.view_60 form .kn-input .kn-radio .widthdrawl-radio .wr-title {
   font-family: "Inter" !important;
   font-style: normal;
   font-weight: 500;
@@ -156,7 +156,7 @@
   display: block;
 }
 
-.view_55 form .kn-input .kn-radio .widthdrawl-radio .wr-desc {
+.view_60 form .kn-input .kn-radio .widthdrawl-radio .wr-desc {
   font-family: "Inter" !important;
   font-style: normal;
   font-weight: 300;
