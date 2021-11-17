@@ -39,7 +39,7 @@ function creatBankAccountList() {
     bankAccounts.forEach((bankAccount, index) => {
 
         let bankAccountTemplate = `
-            <div class="bank-account-item ${index > 0 ? 'bordered': ''}">
+            <div class="bank-account-item bordered">
                 <img src="${bankAccount.BankLogo.value}" alt="bank account logo" width="56" height="56" class="img-bank" />
             
                 <div class="bci-content">
