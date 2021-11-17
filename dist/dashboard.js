@@ -1,3 +1,24 @@
+requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
+    // condition1 : cutoff date
+    var cond1 =
+      new Date() <=
+      new Date(
+        cutoff_day.split("/")[2],
+        cutoff_day.split("/")[1] - 1,
+        cutoff_day.split("/")[0]
+      );
+  
+    // condition2: total number of requests per month
+    var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
+  
+    // compiling all
+    if (cond1 && cond2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  
 // Payoff and Cutoff Dates --> code to be optimized
 var current_month =
   new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
@@ -111,24 +132,3 @@ var html =
   "</section>";
 
 $(html).insertBefore($("#kn-scene_1"));
-
-requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
-  // condition1 : cutoff date
-  var cond1 =
-    new Date() <=
-    new Date(
-      cutoff_day.split("/")[2],
-      cutoff_day.split("/")[1] - 1,
-      cutoff_day.split("/")[0]
-    );
-
-  // condition2: total number of requests per month
-  var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
-
-  // compiling all
-  if (cond1 && cond2) {
-    return true;
-  } else {
-    return false;
-  }
-};

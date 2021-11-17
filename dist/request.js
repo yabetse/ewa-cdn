@@ -1,3 +1,116 @@
+calculate_withdrawable = function (
+    base_salary,
+    requested_amount,
+    withdrawal_fee,
+    withdrawable_threshold
+  ) {
+    var current_date = new Date();
+    var mtd = current_date.getDate() - 1;
+    var tot = new Date(
+      current_date.getFullYear(),
+      current_date.getMonth() + 1,
+      0
+    ).getDate();
+    var balance = (base_salary * mtd) / tot;
+    var available_amount = (balance - requested_amount) * withdrawable_threshold;
+    return available_amount;
+  };
+  
+  amount_requested_checks = function (
+    withdrawable_amount,
+    min_allowed,
+    max_allowed,
+    cutoff_day,
+    nb_requests,
+    max_nb_requests,
+    input_val
+  ) {
+    // condition1 : cutoff date
+    var cond1 =
+      new Date() <=
+      new Date(
+        cutoff_day.split("/")[2],
+        cutoff_day.split("/")[1] - 1,
+        cutoff_day.split("/")[0]
+      );
+  
+    // condition2: total number of requests per month
+    var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
+  
+    // condition3: input in range
+    var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+    if (max_allowed > 0) {
+      var cond3 =
+        input_val >= min_allowed &&
+        input_val <= max_allowed &&
+        input_val <= withdrawable_amount;
+    } else {
+      var cond3 = input_val >= min_allowed && input_val <= withdrawable_amount;
+    }
+  
+    // compiling all
+    if (cond1 == false) {
+      return {
+        status: false,
+        error: "Please wait until next month to submit new requests",
+      };
+    } else if (cond2 == false) {
+      return {
+        status: false,
+        error:
+          "You have exceeded the maximum number of requests allowed per month",
+      };
+    } else if (cond3 == false && max_allowed > 0) {
+      return {
+        status: false,
+        error:
+          "Please provide an amount between " +
+          min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+          " and " +
+          max_allowed_bis.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      };
+    } else if (cond3 == false) {
+      return {
+        status: false,
+        error:
+          "Please provide an amount greater than " +
+          min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      };
+    } else {
+      return { status: true };
+    }
+  };
+  
+  display_message = function (json_obj) {
+    if (json_obj["status"] == false) {
+      var error_msg = json_obj["error"];
+      $(".error-message-custom").hide();
+      $(".validation-message-custom").hide();
+      $(
+        "<div class='error-message-custom'><strong>" +
+          error_msg +
+          "</strong></div>"
+      ).insertAfter($("#view_60 .view-header"));
+      // setTimeout(hide_error, 5000);
+    }
+  
+    if (json_obj["status"] == true) {
+      $(".error-message-custom").hide();
+      $(".validation-message-custom").hide();
+      $(
+        "<div class='validation-message-custom'><strong>All inputs are correct</strong></div>"
+      ).insertAfter($("#view_60 .view-header"));
+      $("#view_60 .kn-button.is-primary").prop("disabled", false);
+    } else {
+      $("#view_60 .kn-button.is-primary").prop("disabled", true);
+    }
+  };
+  
+  $(document).on("knack-form-submit.view_60", function (event, view, record) {
+    $(".error-message-custom").hide();
+    $(".validation-message-custom").hide();
+  });  
+
 // Disable the Submission Button
 $("#view_60 .kn-button.is-primary").prop("disabled", true);
 
@@ -172,117 +285,4 @@ $("input#field_18").on("input", function (e) {
     input_val
   );
   display_message(output);
-});
-
-calculate_withdrawable = function (
-  base_salary,
-  requested_amount,
-  withdrawal_fee,
-  withdrawable_threshold
-) {
-  var current_date = new Date();
-  var mtd = current_date.getDate() - 1;
-  var tot = new Date(
-    current_date.getFullYear(),
-    current_date.getMonth() + 1,
-    0
-  ).getDate();
-  var balance = (base_salary * mtd) / tot;
-  var available_amount = (balance - requested_amount) * withdrawable_threshold;
-  return available_amount;
-};
-
-amount_requested_checks = function (
-  withdrawable_amount,
-  min_allowed,
-  max_allowed,
-  cutoff_day,
-  nb_requests,
-  max_nb_requests,
-  input_val
-) {
-  // condition1 : cutoff date
-  var cond1 =
-    new Date() <=
-    new Date(
-      cutoff_day.split("/")[2],
-      cutoff_day.split("/")[1] - 1,
-      cutoff_day.split("/")[0]
-    );
-
-  // condition2: total number of requests per month
-  var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
-
-  // condition3: input in range
-  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
-  if (max_allowed > 0) {
-    var cond3 =
-      input_val >= min_allowed &&
-      input_val <= max_allowed &&
-      input_val <= withdrawable_amount;
-  } else {
-    var cond3 = input_val >= min_allowed && input_val <= withdrawable_amount;
-  }
-
-  // compiling all
-  if (cond1 == false) {
-    return {
-      status: false,
-      error: "Please wait until next month to submit new requests",
-    };
-  } else if (cond2 == false) {
-    return {
-      status: false,
-      error:
-        "You have exceeded the maximum number of requests allowed per month",
-    };
-  } else if (cond3 == false && max_allowed > 0) {
-    return {
-      status: false,
-      error:
-        "Please provide an amount between " +
-        min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
-        " and " +
-        max_allowed_bis.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-    };
-  } else if (cond3 == false) {
-    return {
-      status: false,
-      error:
-        "Please provide an amount greater than " +
-        min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-    };
-  } else {
-    return { status: true };
-  }
-};
-
-display_message = function (json_obj) {
-  if (json_obj["status"] == false) {
-    var error_msg = json_obj["error"];
-    $(".error-message-custom").hide();
-    $(".validation-message-custom").hide();
-    $(
-      "<div class='error-message-custom'><strong>" +
-        error_msg +
-        "</strong></div>"
-    ).insertAfter($("#view_60 .view-header"));
-    // setTimeout(hide_error, 5000);
-  }
-
-  if (json_obj["status"] == true) {
-    $(".error-message-custom").hide();
-    $(".validation-message-custom").hide();
-    $(
-      "<div class='validation-message-custom'><strong>All inputs are correct</strong></div>"
-    ).insertAfter($("#view_60 .view-header"));
-    $("#view_60 .kn-button.is-primary").prop("disabled", false);
-  } else {
-    $("#view_60 .kn-button.is-primary").prop("disabled", true);
-  }
-};
-
-$(document).on("knack-form-submit.view_60", function (event, view, record) {
-  $(".error-message-custom").hide();
-  $(".validation-message-custom").hide();
 });
