@@ -134,6 +134,8 @@ function createDetailRows(transaction) {
 function createTransactionList() {
     let transactions = parseTransactions();
 
+    console.log("Parsed Transactions", transactions);
+
     let transactionsCont = $('.transaction-list-container');
 
     transactions.forEach(transaction => {
@@ -165,6 +167,8 @@ function createTransactionList() {
         `
         transactionsCont.append(transactionTemplate);
     });
+
+    console.log("Rendered Transactions", transactionsCont);
 }
 
 // Setup event handlers
@@ -211,6 +215,7 @@ function setupEventHandlers() {
 
 // Main method: creates transaction list  and calls the event handlers
 function loadCustomTrasactionView() {
+    console.log("Loading Transactions");
     createTransactionList();
     setupEventHandlers();
 }
