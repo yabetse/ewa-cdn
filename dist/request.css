@@ -115,12 +115,13 @@
 }
 
 .view_60 form .kn-input .kn-radio .control.selected {
-  background: linear-gradient(
+  /* background: linear-gradient(
       0deg,
       rgba(0, 70, 133, 0.09),
       rgba(0, 70, 133, 0.09)
     ),
-    #ffffff;
+    #ffffff; */
+  background: #FFFFFF;
   border: 1.5px solid rgba(38, 50, 56, 0.1);
 }
 
