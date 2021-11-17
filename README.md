@@ -13,7 +13,7 @@
     This repo serves as a jsDeliver CDN for Earned Wage Access project 
 </div>
 
----
+
 
 <br />
 
@@ -33,6 +33,10 @@ https://cdn.jsdelivr.net/gh/['owner']/['repo']@['commit-id']/['path to file']
 For example, for the change shown in the picture above, the CDN link to get the latest changes is 
 
 [https://cdn.jsdelivr.net/gh/yabetse/ewa-cdn@09ae00c357f64af59a1e8afe4b5e47c0a2da350c/dist/transaction.min.js](https://cdn.jsdelivr.net/gh/yabetse/ewa-cdn@09ae00c357f64af59a1e8afe4b5e47c0a2da350c/dist/transaction.min.js%27%60)
+
+<br />
+
+
 
 For releases, create a release branch then change the "commit-id" with `latest` keyword.
 
