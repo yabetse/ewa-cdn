@@ -66,7 +66,6 @@ function sendOTP(callback) {
 
   $.ajax({
     //url:'https://www.promptpay.asia/pwa/send_sms.php?to=' + phoneNr
-    // url: 'https://ewaservices.ddns.net/ewa/send_sms.php?to=' + phoneNr
     url: 'https://ewa-services.com/ewa/send_sms.php?to=' + phoneNr
   }).done(function (response) {
     $("#kn-loading-spinner").hide();
@@ -86,7 +85,7 @@ function submitOTP() {
   $.ajax({
     //url:'https://www.promptpay.asia/pwa/validate_otp.php?to=' + phoneNr + '&otp=' +  OTPCode
     url:
-      "https://ewaservices.ddns.net/ewa/validate_otp.php?to=" +
+      "https://ewa-services.com/ewa/send_sms.php?to=" +
       phoneNr +
       "&otp=" +
       OTPCode,
