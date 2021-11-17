@@ -103,7 +103,7 @@ function createDetailRows(transaction) {
             value = formattedDate.concat(' at', time);
         }
 
-        if (detail === "WithdrawalSpeed") {
+        /* if (detail === "WithdrawalSpeed") {
             let speed = value.split('-');
 
             value = `
@@ -112,7 +112,7 @@ function createDetailRows(transaction) {
                     <span class='ws-desc'>${speed[1]}<span>
                 </span>
             `
-        }
+        } */
 
         let row = `
             <div class="ti-content-row">
