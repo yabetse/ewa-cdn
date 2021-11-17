@@ -74,7 +74,8 @@ function parseTransactions() {
 
 // Parses and returns formatted date
 function formatDate(stringDate) {
-    let date = new Date(stringDate);
+    let dateArray = StringDate.split('/');
+    let date = new Date(+dateArray[2], dateArray[1] - 1, +dateArray[0]);
 
     let year = date.getFullYear();
 
@@ -134,8 +135,6 @@ function createDetailRows(transaction) {
 function createTransactionList() {
     let transactions = parseTransactions();
 
-    console.log("Parsed Transactions", transactions);
-
     let transactionsCont = $('.transaction-list-container');
 
     transactions.forEach(transaction => {
@@ -167,8 +166,6 @@ function createTransactionList() {
         `
         transactionsCont.append(transactionTemplate);
     });
-
-    console.log("Rendered Transactions", transactionsCont);
 }
 
 // Setup event handlers
@@ -215,7 +212,6 @@ function setupEventHandlers() {
 
 // Main method: creates transaction list  and calls the event handlers
 function loadCustomTrasactionView() {
-    console.log("Loading Transactions");
     createTransactionList();
     setupEventHandlers();
 }
