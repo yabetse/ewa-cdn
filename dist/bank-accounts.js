@@ -2,7 +2,7 @@
 function parseBankAccounts() {
     let bankAccounts = [];
 
-    $(".view_45 .kn-list-content .kn-list-item-container").each(function () {
+    $("#view_45 .kn-list-content .kn-list-item-container, #view_69 .kn-list-content .kn-list-item-container").each(function () {
         let bankAccount = {};
 
         $(this).find('.kn-detail').each(function () {
