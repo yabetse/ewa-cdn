@@ -48,7 +48,7 @@ function setStatusIcon(status) {
 function parseTransactions() {
     let transactions = [];
 
-    $(".kn-list-content .kn-list-item-container").each(function () {
+    $("#view_61 .kn-list-content .kn-list-item-container, #view_62 .kn-list-content .kn-list-item-container").each(function () {
         let transaction = {};
 
         $(this).find('.kn-detail').each(function () {
