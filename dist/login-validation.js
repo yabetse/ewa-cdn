@@ -7,7 +7,8 @@ $.validator.addMethod(
     // Regex for Thai phone - /(\+66)(\d{1,2}\-?\d{3}\-?\d{3,4})/
     return (
       this.optional(element) ||
-      (value.length == 9 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/))
+      (value.length == 9 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
+      (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/))
     );
   },
   "Please enter a valid phone number"
