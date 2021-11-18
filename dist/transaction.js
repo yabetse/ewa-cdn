@@ -215,3 +215,10 @@ function loadCustomTrasactionView() {
     createTransactionList();
     setupEventHandlers();
 }
+
+/* No Transaction */
+
+<div class="content">
+        <span class="material-icons no-transactions">sync_alt</span>
+        <h2>Recent Requests</h2>
+    </div>
