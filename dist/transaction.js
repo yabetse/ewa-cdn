@@ -153,7 +153,7 @@ function createTransactionList() {
                     </div>
 
                     <div class="ti-header-amount">
-                        <span class="ti-amount">${transaction.TotalAmount.value}</span>
+                        <span class="ti-amount">${transaction.NetAmount.value}</span>
 
                         ${setStatusIcon(transaction.Status.value)}
                     </div>
