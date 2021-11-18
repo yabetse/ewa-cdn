@@ -4,7 +4,6 @@
   background-color: #f8f8f8 !important;
 }
 
-
 #knack-body .kn-content {
   height: 100vh;
   width: 100%;
@@ -46,9 +45,8 @@
   cursor: pointer;
 }
 
-
 /* Header Styles */
-.kn-info-bar{
+.kn-info-bar {
   visibility: hidden !important;
 }
 
@@ -93,7 +91,7 @@ header#kn-app-header .kn-container #app-menu-container {
   margin: auto 0px auto 45px;
 }
 
-header#kn-app-header .kn-container #kn-app-menu{
+header#kn-app-header .kn-container #kn-app-menu {
   width: 100%;
 }
 
@@ -108,7 +106,7 @@ header#kn-app-header .kn-container #knack-logo .kn-title {
   text-transform: uppercase;
 }
 
-header#kn-app-header .kn-container .kn-mobile-controls{
+header#kn-app-header .kn-container .kn-mobile-controls {
   display: none !important;
 }
 
@@ -118,7 +116,7 @@ header#kn-app-header .kn-container .kn-mobile-controls{
   justify-content: flex-start;
 }
 
-.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li{
+.kn-content .kn-navigation-bar .buttons.is-nav #app-menu-list li {
   margin: auto 8px;
 }
 
@@ -148,23 +146,22 @@ header#kn-app-header .kn-container .kn-mobile-controls{
 }
 
 .kn-content .kn-navigation-bar a.header-logout {
-    padding: 10px 20px;
-    border-radius: 500px;
-    margin-left: 8px;
-    text-decoration: none !important;
-    font-family: "Inter" !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    border: 2px solid #eee;
-    color: #888 !important;
-    background: transparent !important;
-    transition: all 0.3s ease-in-out;
-    margin: auto 8px auto auto;
+  padding: 10px 20px;
+  border-radius: 500px;
+  text-decoration: none !important;
+  font-family: "Inter" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border: 2px solid #eee;
+  color: #888 !important;
+  background: transparent !important;
+  transition: all 0.3s ease-in-out;
+  margin: auto 8px auto auto;
 }
 
-.kn-content .kn-navigation-bar a.header-logout:hover{
-    color: #027470 !important;
-    border-color: #027470 !important;
+.kn-content .kn-navigation-bar a.header-logout:hover {
+  color: #027470 !important;
+  border-color: #027470 !important;
 }
 
 /* bottom navigation */
@@ -182,18 +179,17 @@ header#kn-app-header .kn-container .kn-mobile-controls{
   justify-content: center;
 }
 
-
 @media only screen and (min-width: 768px) {
-  .mobile-nav{
+  .mobile-nav {
     display: none;
   }
 }
 
-.mobile-nav > ul > a.header-logout{
+.mobile-nav > ul > a.header-logout {
   display: none !important;
 }
 
-.mobile-nav ul{
+.mobile-nav ul {
   width: 100%;
   margin: auto;
   display: flex;
@@ -211,7 +207,7 @@ header#kn-app-header .kn-container .kn-mobile-controls{
   justify-content: center;
 }
 
-.mobile-nav ul li a{
+.mobile-nav ul li a {
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -220,9 +216,9 @@ header#kn-app-header .kn-container .kn-mobile-controls{
   justify-content: center;
   text-decoration: none !important;
   cursor: pointer;
-  color: #7E80B8;
+  color: #7e80b8;
 }
 
-.mobile-nav ul li.is-active a{
+.mobile-nav ul li.is-active a {
   color: #fff;
 }
