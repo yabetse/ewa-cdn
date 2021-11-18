@@ -1,12 +1,10 @@
-#view_51,
-#view_52,
-#view_64,
-#view_65,
-#view_66,
-#view_68,
-#view_60 #kn-input-field_63 {
+#view_51, #view_52, #view_64, #view_65, #view_66, #view_68, #view_60 #kn-input-field_63 {
   visibility: hidden;
   position: absolute;
+}
+
+#kn-scene_1.kn-container {
+  padding: 0 !important;
 }
 
 .error-message-custom {
@@ -126,4 +124,43 @@
 
 #custom-view-scene1 .max-withdrawable .max-amount-button .disabled {
   background: #b9bbea;
+}
+
+/* Recent Requests */
+
+#view_93 .recent-requests {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+#view_93 .recent-requests h2 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+#view_93 .recent-requests .all-requests a {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.04em;
+  color: #757575;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#view_93 .recent-requests .all-requests .material-icons {
+  font-size: 14px;
+  color: #027470;
+  background: linear-gradient(0deg, rgba(2, 116, 112, 0.13), rgba(2, 116, 112, 0.13)), #FFFFFF;
+  border-radius: 20px;
+  display: inline-block;
+  vertical-align: middle;
 }
