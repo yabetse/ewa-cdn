@@ -1,9 +1,17 @@
-#kn-scene_19 #view_56 .columns .kn-details-column .kn-details-group {
+#kn-scene_19 #view_56 section.columns {
+  margin: 0 !important;
+}
+
+#kn-scene_19 #view_56 section.columns .kn-details-column {
+  padding: 0 !important;
+}
+
+#kn-scene_19 #view_56 section.columns .kn-details-column .kn-details-group {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-#kn-scene_19 #view_56 .columns .kn-details-column .kn-details-group .kn-details-group-column {
+#kn-scene_19 #view_56 section.columns .kn-details-column .kn-details-group .kn-details-group-column {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
