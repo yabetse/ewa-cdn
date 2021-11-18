@@ -50,32 +50,13 @@ amount_requested_checks = function (
 
   // compiling all
   if (cond1 == false) {
-    return {
-      status: false,
-      error: "Please wait until next month to submit new requests",
-    };
+    return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
-    return {
-      status: false,
-      error:
-        "You have exceeded the maximum number of requests allowed per month",
-    };
+    return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
   } else if (cond3 == false && max_allowed > 0) {
-    return {
-      status: false,
-      error:
-        "Please provide an amount between " +
-        min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
-        " and " +
-        max_allowed_bis.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-    };
+    return {status: false, error: "Please provide an amount between " + min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + max_allowed_bis.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond3 == false) {
-    return {
-      status: false,
-      error:
-        "Please provide an amount greater than " +
-        min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-    };
+    return {status: false, error: "Please provide an amount greater than " + min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else {
     return { status: true };
   }
