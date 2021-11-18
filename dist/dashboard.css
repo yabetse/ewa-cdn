@@ -1,4 +1,10 @@
-#view_51, #view_52, #view_64, #view_65, #view_66, #view_68, #view_60 #kn-input-field_63 {
+#view_51,
+#view_52,
+#view_64,
+#view_65,
+#view_66,
+#view_68,
+#view_60 #kn-input-field_63 {
   visibility: hidden;
   position: absolute;
 }
@@ -26,10 +32,16 @@
 }
 
 .kn-scenes.kn-section {
-  padding: 72px 0px 60px 0px;
+  padding: 60px 0px;
   max-width: 330px;
   width: 100%;
   margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .kn-scenes.kn-section {
+    padding: 72px 0px 60px 0px;
+  }
 }
 
 #custom-view-scene1 .payday-wrapper {
@@ -158,7 +170,12 @@
 #view_93 .recent-requests .all-requests .material-icons {
   font-size: 14px;
   color: #027470;
-  background: linear-gradient(0deg, rgba(2, 116, 112, 0.13), rgba(2, 116, 112, 0.13)), #FFFFFF;
+  background: linear-gradient(
+      0deg,
+      rgba(2, 116, 112, 0.13),
+      rgba(2, 116, 112, 0.13)
+    ),
+    #ffffff;
   border-radius: 20px;
   display: inline-block;
   vertical-align: middle;
