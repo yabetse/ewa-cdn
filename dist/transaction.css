@@ -258,3 +258,30 @@
 .custom-search-bar .btn-clear#search:hover {
     color: #027470;
 }
+
+/* No Transactions Style */
+
+#view_95 .no-transactions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    padding: 100px 0;
+}
+
+#view_95 .no-transactions .icon {
+	color: #B9B9B9;
+	background-color: #F0F0F0;
+	font-size: 40px;
+    padding: 15px;
+    border-radius: 40px;
+    margin: 20px 0;
+}
+
+#view_95 .no-transactions .message {
+	color: #888888;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+}
