@@ -1,38 +1,15 @@
-calculate_withdrawable = function (
-  base_salary,
-  requested_amount,
-  withdrawal_fee,
-  withdrawable_threshold
-) {
+calculate_withdrawable = function (base_salary, requested_amount, withdrawable_threshold) {
   var current_date = new Date();
   var mtd = current_date.getDate() - 1;
-  var tot = new Date(
-    current_date.getFullYear(),
-    current_date.getMonth() + 1,
-    0
-  ).getDate();
+  var tot = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate();
   var balance = (base_salary * mtd) / tot;
   var available_amount = (balance - requested_amount) * withdrawable_threshold;
   return available_amount;
 };
 
-amount_requested_checks = function (
-  withdrawable_amount,
-  min_allowed,
-  max_allowed,
-  cutoff_day,
-  nb_requests,
-  max_nb_requests,
-  input_val
-) {
+amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
   // condition1 : cutoff date
-  var cond1 =
-    new Date() <=
-    new Date(
-      cutoff_day.split("/")[2],
-      cutoff_day.split("/")[1] - 1,
-      cutoff_day.split("/")[0]
-    );
+  var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
 
   // condition2: total number of requests per month
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
@@ -40,10 +17,7 @@ amount_requested_checks = function (
   // condition3: input in range
   var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
   if (max_allowed > 0) {
-    var cond3 =
-      input_val >= min_allowed &&
-      input_val <= max_allowed &&
-      input_val <= withdrawable_amount;
+    var cond3 = input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
   } else {
     var cond3 = input_val >= min_allowed && input_val <= withdrawable_amount;
   }
@@ -67,11 +41,7 @@ display_message = function (json_obj) {
     var error_msg = json_obj["error"];
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
-    $(
-      "<div class='error-message-custom'><strong>" +
-        error_msg +
-        "</strong></div>"
-    ).insertAfter($("#view_60 .view-header"));
+    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertAfter($("#view_60 .view-header"));
     // setTimeout(hide_error, 5000);
   }
 
@@ -96,27 +66,17 @@ $(document).on("knack-form-submit.view_60", function (event, view, record) {
 $("#view_60 .kn-button.is-primary").prop("disabled", true);
 
 // Variables for Global Conditions
-var requested_transactions = parseInt(
-  $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "")
-);
-var max_number_requests = parseFloat(
-  $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "")
-);
+var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
+var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var input_val = 0;
 
 var cutoffs = Array();
-$("#view_64 .kn-detail.field_82 .kn-detail-body span span span").each(
-  function () {
+$("#view_64 .kn-detail.field_82 .kn-detail-body span span span").each(function () {
     cutoffs.push($(this).text());
   }
 );
 
-var current_month =
-  new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
 var months = Array();
 $("#view_64 .kn-detail.field_88 .kn-detail-body span span span").each(
   function () {
@@ -131,54 +91,18 @@ for (var i = 0; i < months.length; i++) {
 }
 
 // Calculate Withdrawable Amount Variables
-var base_salary = parseFloat(
-  $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "")
-);
-var requested_amount = parseFloat(
-  $("#view_66 .kn-pivot-calc:eq(0)").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_66 .kn-pivot-calc:eq(0)").text().replace(/,/g, "")
-);
-var withdrawable_threshold = parseFloat(
-  $("#view_64 .field_89 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_64 .field_89 .kn-detail-body").text().replace(/,/g, "")
-);
+var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
+var requested_amount = parseFloat($("#view_66 .kn-pivot-calc:eq(0)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(0)").text().replace(/,/g, ""));
+var withdrawable_threshold = parseFloat($("#view_64 .field_89 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_89 .kn-detail-body").text().replace(/,/g, ""));
 
 // Conditions Check Variables
-var min_allowed_employee = parseFloat(
-  $("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, "")
-);
-var max_allowed_employee = parseFloat(
-  $("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, "")
-);
-var min_allowed_company = parseFloat(
-  $("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, "")
-);
-var max_allowed_company = parseFloat(
-  $("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, "")
-);
+var min_allowed_employee = parseFloat($("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, ""));
+var max_allowed_employee = parseFloat($("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, ""));
+var min_allowed_company = parseFloat($("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, ""));
+var max_allowed_company = parseFloat($("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, ""));
 
-var normal_fee_setting = parseFloat(
-  $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "")
-);
-var fast_fee_setting = parseFloat(
-  $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "") == ""
-    ? 0
-    : $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "")
-);
+var normal_fee_setting = parseFloat($("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, ""));
+var fast_fee_setting = parseFloat($("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, ""));
 
 if (min_allowed_employee > 0 && min_allowed_company > 0) {
   var min_allowed = Math.max(min_allowed_employee, min_allowed_company);
@@ -208,12 +132,7 @@ if (speed.toLowerCase().indexOf("normal") > -1) {
   var withdrawal_fee = fast_fee_setting;
 }
 $("#view_60 #field_63").attr("value", withdrawal_fee);
-var available_amount = calculate_withdrawable(
-  base_salary,
-  requested_amount,
-  withdrawal_fee,
-  withdrawable_threshold
-);
+var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
 
 $("input[type=radio][name=view_60-field_92]").change(function () {
   var input_val = $("#field_18").val();
@@ -224,21 +143,8 @@ $("input[type=radio][name=view_60-field_92]").change(function () {
     withdrawal_fee = fast_fee_setting;
   }
   $("#view_60 #field_63").attr("value", withdrawal_fee);
-  available_amount = calculate_withdrawable(
-    base_salary,
-    requested_amount,
-    withdrawal_fee,
-    withdrawable_threshold
-  );
-  var output = amount_requested_checks(
-    available_amount,
-    min_allowed,
-    max_allowed,
-    cutoff_day,
-    requested_transactions,
-    max_number_requests,
-    input_val
-  );
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 });
 
@@ -250,20 +156,7 @@ $("input#field_18").on("input", function (e) {
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
     withdrawal_fee = fast_fee_setting;
   }
-  available_amount = calculate_withdrawable(
-    base_salary,
-    requested_amount,
-    withdrawal_fee,
-    withdrawable_threshold
-  );
-  var output = amount_requested_checks(
-    available_amount,
-    min_allowed,
-    max_allowed,
-    cutoff_day,
-    requested_transactions,
-    max_number_requests,
-    input_val
-  );
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 });

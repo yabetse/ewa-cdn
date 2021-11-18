@@ -93,7 +93,7 @@ function createDetailRows(transaction) {
     let detailRows = "";
     for (const detail in transaction) {
 
-        if (detail === 'PWATotalAmount') continue;
+        if (detail === 'TotalAmount') continue;
 
         let value = transaction[detail].value;
         if (detail === 'RequestDate') {
@@ -153,7 +153,7 @@ function createTransactionList() {
                     </div>
 
                     <div class="ti-header-amount">
-                        <span class="ti-amount">${transaction.PWANetAmount.value}</span>
+                        <span class="ti-amount">${transaction.NetAmount.value}</span>
 
                         ${setStatusIcon(transaction.Status.value)}
                     </div>
