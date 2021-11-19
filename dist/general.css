@@ -1,5 +1,10 @@
 /* General */
-#knack-body {
+
+#kn-app-mobile-container #knack-logo {
+  display: none !important;
+}
+
+#knack-body, body {
   font-family: "Inter", sans-serif !important;
   background-color: #f8f8f8 !important;
 }
@@ -11,6 +16,11 @@
   display: flex !important;
   flex-direction: column !important;
   position: relative;
+}
+
+.kn-scenes.kn-section .kn-container {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .kn-scenes.kn-section {
@@ -95,7 +105,7 @@ header#kn-app-header .kn-container #kn-app-menu {
   width: 100%;
 }
 
-header#kn-app-header .kn-container #knack-logo .kn-title {
+header#kn-app-header .kn-container #knack-logo-custom .kn-title {
   font-family: "Inter" !important;
   font-style: normal;
   font-weight: 900 !important;
@@ -104,6 +114,11 @@ header#kn-app-header .kn-container #knack-logo .kn-title {
   letter-spacing: 0.08em;
   color: #004685 !important;
   text-transform: uppercase;
+  text-decoration: none;
+}
+
+header#kn-app-header .kn-container #knack-logo-custom {
+  margin: 0;
 }
 
 header#kn-app-header .kn-container .kn-mobile-controls {
