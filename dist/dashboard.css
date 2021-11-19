@@ -1,15 +1,9 @@
-#view_51,
-#view_52,
-#view_64,
-#view_65,
-#view_66,
-#view_68,
-#view_60 #kn-input-field_63 {
+#view_51, #view_52, #view_64, #view_65, #view_66, #view_68, #view_60 #kn-input-field_63 {
   visibility: hidden;
   position: absolute;
 }
 
-#kn-scene_1.kn-container {
+.kn-scenes.kn-section .kn-container {
   padding: 0 !important;
   margin: 0 !important;
 }
