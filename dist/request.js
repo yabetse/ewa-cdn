@@ -45,7 +45,7 @@ display_message = function (json_obj) {
     var error_msg = json_obj["error"];
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
-    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertAfter($("#view_60 .view-header"));
+    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertAfter($("#view_60 form ul"));
     // setTimeout(hide_error, 5000);
   }
 
