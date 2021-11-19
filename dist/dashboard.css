@@ -3,11 +3,6 @@
   position: absolute;
 }
 
-.kn-scenes.kn-section .kn-container {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
 .error-message-custom {
   background-color: rgba(255, 97, 97, 0.5);
   border-radius: 0.35em;
