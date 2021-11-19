@@ -52,12 +52,13 @@ function parseTransactions() {
         let transaction = {};
 
         $(this).find('.kn-detail').each(function () {
+            let classes = $(this).attr('class').split(' ');
             let label = $(this).find('.kn-detail-label span span').text();
 
-            let detailKey = label.split(' ').join('');
+            let detailKey = classes.find(cls => cls.includes('field'));
             let detailVal = $(this).find('.kn-detail-body span span').text();
 
-            if (detailKey === 'BankAccount')
+            if (detailKey === 'field_59')
                 detailVal = $(this).find('.kn-detail-body span span span').text();
 
             transaction[detailKey] = {
@@ -93,17 +94,17 @@ function createDetailRows(transaction) {
     let detailRows = "";
     for (const detail in transaction) {
 
-        if (detail === 'TotalAmount') continue;
+        if (detail === 'field_64') continue;
 
         let value = transaction[detail].value;
-        if (detail === 'RequestDate') {
+        if (detail === 'field_24') {
             let formattedDate = formatDate(value.substring(0, 10));
             let time = value.substring(10, value.length);
 
             value = formattedDate.concat(' at', time);
         }
 
-        /* if (detail === "WithdrawalSpeed") {
+        /* if (detail === "field_95") {
             let speed = value.split('-');
 
             value = `
@@ -120,7 +121,7 @@ function createDetailRows(transaction) {
                     ${transaction[detail].label}
                 </span>
 
-                <span class="ti-row-value ${detail === 'Status' && getStatusClass(value)}">
+                <span class="ti-row-value ${detail === 'field_23' && getStatusClass(value)}">
                     ${value || '-'}
                 </span>
             </div>
@@ -215,10 +216,3 @@ function loadCustomTrasactionView() {
     createTransactionList();
     setupEventHandlers();
 }
-
-/* No Transaction */
-
-<div class="content">
-        <span class="material-icons no-transactions">sync_alt</span>
-        <h2>Recent Requests</h2>
-    </div>
