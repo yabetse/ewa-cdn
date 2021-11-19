@@ -140,10 +140,10 @@ function createTransactionList() {
 
     transactions.forEach(transaction => {
 
-        let formattedDate = formatDate(transaction.RequestDate.value.substring(0, 10));
+        let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
 
         let transactionTemplate = `
-            <div class="transaction-item ${getStatusClass(transaction.Status.value)}">
+            <div class="transaction-item ${getStatusClass(transaction.field_23.value)}">
                 <div class="ti-header">
                     <div class="ti-header-tgl">
                         <span class="ti-withdrawal-date">${formattedDate}</span>
@@ -154,9 +154,9 @@ function createTransactionList() {
                     </div>
 
                     <div class="ti-header-amount">
-                        <span class="ti-amount">${transaction.NetAmount.value}</span>
+                        <span class="ti-amount">${transaction.field_18.value}</span>
 
-                        ${setStatusIcon(transaction.Status.value)}
+                        ${setStatusIcon(transaction.field_23.value)}
                     </div>
                 </div>
 
