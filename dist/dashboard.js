@@ -37,7 +37,7 @@ $(months).each(function (index) {
 });
 
 if (payOffs.length) {
-  $(payoffs).each(function (index) {
+  $(payOffs).each(function (index) {
     if (index === monthIndex) {
       payday = $(this).text();
 
