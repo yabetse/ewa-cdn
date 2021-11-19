@@ -25,7 +25,7 @@ let payday = "-";
 let cutoff_day = "-";
 
 let months = $("#view_68 .kn-detail.field_88 .kn-detail-body span span span");
-let payoffs = $("#view_68 .kn-detail.field_76 .kn-detail-body span span span");
+let payOffs = $("#view_68 .kn-detail.field_76 .kn-detail-body span span span");
 let cutOffs = $("#view_68 .kn-detail.field_82 .kn-detail-body span span span");
 
 $(months).each(function (index) {
