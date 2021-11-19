@@ -114,6 +114,11 @@ header#kn-app-header .kn-container #knack-logo-custom .kn-title {
   letter-spacing: 0.08em;
   color: #004685 !important;
   text-transform: uppercase;
+  text-decoration: none;
+}
+
+header#kn-app-header .kn-container #knack-logo-custom {
+  margin: 0;
 }
 
 header#kn-app-header .kn-container .kn-mobile-controls {
