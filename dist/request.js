@@ -9,7 +9,11 @@ calculate_withdrawable = function (base_salary, requested_amount, withdrawable_t
 
 amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
   // condition1 : cutoff date
-  var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+  if (cutoff_date == "-") {
+    var cond1 = false;
+  } else {
+    var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+  }
 
   // condition2: total number of requests per month
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
@@ -88,6 +92,10 @@ for (var i = 0; i < months.length; i++) {
   if (months[i] == current_month) {
     var cutoff_day = cutoffs[i];
   }
+}
+
+if (cutoffs.length == 0) {
+  var cutoff_day = "-";
 }
 
 // Calculate Withdrawable Amount Variables

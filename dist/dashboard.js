@@ -1,6 +1,10 @@
 requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
     // condition1 : cutoff date
-    var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    if (cutoff_date == "-") {
+      var cond1 = false;
+    } else {
+      var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+    }
   
     // condition2: total number of requests per month
     var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
@@ -14,8 +18,7 @@ requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
   };
   
 // Payoff and Cutoff Dates --> code to be optimized
-var current_month =
-  new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
 
 var months = Array();
 $("#view_68 .kn-detail.field_88 .kn-detail-body span span span").each(
@@ -45,6 +48,14 @@ for (var i = 0; i < months.length; i++) {
   }
 }
 
+if (payoffs.length == 0) {
+  var payday = "-";
+}
+
+if (cutoffs.length == 0) {
+  var cutoff_day = "-";
+}
+
 // Withdrawable Amount and Other Conditions
 
 var base_salary = parseFloat($("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, ""));
@@ -63,11 +74,7 @@ var available_amount = balance - requested_amount;
 
 // Compiling the HTML
 
-var check = requests_check(
-  cutoff_day,
-  requested_transactions,
-  max_number_requests
-);
+var check = requests_check(cutoff_day, requested_transactions, max_number_requests);
 
 var html = '<section id="custom-view-scene1">'
           +   '<div class="payday-wrapper">'
