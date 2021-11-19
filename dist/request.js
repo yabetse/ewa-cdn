@@ -9,7 +9,7 @@ calculate_withdrawable = function (base_salary, requested_amount, withdrawable_t
 
 amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
   // condition1 : cutoff date
-  if (cutoff_date == "-") {
+  if (cutoff_day == "-") {
     var cond1 = false;
   } else {
     var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
