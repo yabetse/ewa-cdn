@@ -169,3 +169,22 @@
   margin-top: 2px;
   font-size: 13px;
 }
+
+/* Withdrawable Amount Info Message */
+#kn-input-field_18 .label.kn-label {
+  margin-bottom: 0;
+}
+
+#kn-input-field_18 .control {
+  margin-top: 0.4em;
+}
+
+#kn-input-field_18 .amount-info-message {
+  font-weight: normal;
+  font-size: 11px;
+  color: #666666;
+}
+
+#kn-input-field_18 .amount-info-message span {
+  color: #027470;
+}
