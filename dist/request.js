@@ -1,3 +1,8 @@
+hide_error = function () {
+    $(".error-message-custom").hide();
+    // $(".validation-message-custom").hide();
+};
+
 calculate_withdrawable = function (base_salary, requested_amount, withdrawable_threshold) {
   var current_date = new Date();
   var mtd = current_date.getDate() - 1;
@@ -59,6 +64,7 @@ display_message = function (json_obj) {
   } else {
     $("#view_60 .kn-button.is-primary").prop("disabled", true);
   }
+  setTimeout(hide_error, 5000);
 };
 
 $(document).on("knack-form-submit.view_60", function (event, view, record) {
