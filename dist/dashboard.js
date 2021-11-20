@@ -18,7 +18,7 @@ requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
 };
 
 // Payoff and Cutoff Dates
-let current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
 
 let monthIndex = -1;
 let payday = "-";
