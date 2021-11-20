@@ -28,13 +28,11 @@ var cutoffs = $("#view_96 .kn-table tbody td.field_82 span");
 
 $.each(months, function(i,v) {
   if (v.textContent.trim() == current_month) {
-    payday = paydays[i].textContent.trim();
-    cutoff_day = cutoffs[i].textContent.trim();
+    payday = paydays[i].textContent.trim() || "-";
+    cutoff_day = cutoffs[i].textContent.trim() || "-";
   }
 });
 
-var payday = payday == "" ? "-" : payday;
-var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 
 // Withdrawable Amount and Other Conditions
 var base_salary = parseFloat($("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, ""));
