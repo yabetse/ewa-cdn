@@ -1,4 +1,8 @@
-/* Request Form */
+#view_97 {
+  visibility: hidden;
+  position: absolute;
+}
+
 .view_60 {
   margin-top: 24px;
 }
