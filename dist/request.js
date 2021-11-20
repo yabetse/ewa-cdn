@@ -101,8 +101,8 @@ if (cutoffs.length == 0) {
 var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
 var cutoff_day = "-";
 
-var months = $("#view_96 .kn-table tbody td.field_88 span");
-var cutoffs = $("#view_96 .kn-table tbody td.field_82 span");
+var months = $("#view_97 .kn-table tbody td.field_88 span");
+var cutoffs = $("#view_97 .kn-table tbody td.field_82 span");
 
 $.each(months, function(i,v) {
   if (v.textContent.trim() == current_month) {
