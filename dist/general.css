@@ -23,17 +23,12 @@
   margin: 0 !important;
 }
 
-.kn-scenes.kn-section .kn-scene {
-  padding: 60px 0px;
+.kn-scenes.kn-section {
+  padding: 0px;
   height: 100%;
+  max-width: 330px;
   width: 100%;
   margin: auto;
-  max-width: 330px;
-}
-
-/* non employee-related sections (desktop dimensions) */
-.kn-scenes.kn-section #kn-scene_11 {
-  max-width: 80% !important;
 }
 
 .kn-view {
