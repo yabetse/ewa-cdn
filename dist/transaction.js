@@ -21,11 +21,11 @@ function resetSearchBar() {
 }
 
 // Sets the transaction item status class
-function getStatusClass(status) {
-    switch (status) {
-        case "Paid Out":
+function getStatusClass(statusClass) {
+    switch (statusClass) {
+        case "paid-out":
             return "status-payed";
-        case "In Progress":
+        case "in-progress":
             return "status-pending";
         default:
             return "status-rejected";
@@ -33,11 +33,11 @@ function getStatusClass(status) {
 }
 
 // Sets the transaction icon based on transaction status
-function setStatusIcon(status) {
-    switch (status) {
-        case "Paid Out":
+function setStatusIcon(statusClass) {
+    switch (statusClass) {
+        case "paid-out":
             return `<span class="material-icons status-icon status-payed">done</span>`;
-        case "In Progress":
+        case "in-progress":
             return `<span class="material-icons status-icon status-pending">hourglass_bottom</span>`;
         default:
             return `<span class="material-icons status-icon status-error">do_not_disturb_on</span>`;
@@ -58,12 +58,17 @@ function parseTransactions() {
             let detailKey = classes.find(cls => cls.includes('field'));
             let detailVal = $(this).find('.kn-detail-body span span').text();
 
-            if (detailKey === 'field_59')
+            if (detailKey === 'field_59' || detailKey === 'field_23')
                 detailVal = $(this).find('.kn-detail-body span span span').text();
+
+            let statusClass  = "";
+            if(detailKey === 'field_23')
+                statusClass = $(this).find('.kn-detail-body span span span').attr('class');
 
             transaction[detailKey] = {
                 "label": label,
-                "value": detailVal
+                "value": detailVal,
+                ...(detailKey === 'field_23') && {"class": statusClass},
             };
         });
 
@@ -121,7 +126,7 @@ function createDetailRows(transaction) {
                     ${transaction[detail].label}
                 </span>
 
-                <span class="ti-row-value ${detail === 'field_23' && getStatusClass(value)}">
+                <span class="ti-row-value ${detail === 'field_23' && getStatusClass(transaction[detail].class)}">
                     ${value || '-'}
                 </span>
             </div>
@@ -143,7 +148,7 @@ function createTransactionList() {
         let formattedDate = formatDate(transaction.field_24.value.substring(0, 10));
 
         let transactionTemplate = `
-            <div class="transaction-item ${getStatusClass(transaction.field_23.value)}">
+            <div class="transaction-item ${getStatusClass(transaction.field_23.class)}">
                 <div class="ti-header">
                     <div class="ti-header-tgl">
                         <span class="ti-withdrawal-date">${formattedDate}</span>
@@ -156,7 +161,7 @@ function createTransactionList() {
                     <div class="ti-header-amount">
                         <span class="ti-amount">${transaction.field_18.value}</span>
 
-                        ${setStatusIcon(transaction.field_23.value)}
+                        ${setStatusIcon(transaction.field_23.class)}
                     </div>
                 </div>
 
