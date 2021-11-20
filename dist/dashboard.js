@@ -36,43 +36,7 @@ $.each(months, function(i,v) {
 var payday = payday == "" ? "-" : payday;
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 
-/* var monthIndex = -1;
-var payday = "-";
-var cutoff_day = "-";
-
-var months = $("#view_68 .kn-detail.field_88 .kn-detail-body span span span");
-var payOffs = $("#view_68 .kn-detail.field_76 .kn-detail-body span span span");
-var cutOffs = $("#view_68 .kn-detail.field_82 .kn-detail-body span span span");
-
-$(months).each(function (index) {
-  if ($(this).text() === current_month) {
-    monthIndex = index;
-    return false;
-  }
-});
-
-if (payOffs.length) {
-  $(payOffs).each(function (index) {
-    if (index === monthIndex) {
-      payday = $(this).text();
-      return false;
-    }
-  });
-}
-
-if (cutOffs.length) {
-  $(cutOffs).each(
-    function (index) {
-      if (index === monthIndex) {
-        cutoff_day = $(this).text();
-        return false;
-      }
-    }
-  )
-} */
-
 // Withdrawable Amount and Other Conditions
-
 var base_salary = parseFloat($("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_51 .field_44 .kn-detail-body").text().replace(/,/g, ""));
 var requested_amount = parseFloat($("#view_52 .kn-pivot-calc:eq(0)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(0)").text().replace(/,/g, ""));
 var requested_transactions = parseInt($("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_52 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
