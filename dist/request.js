@@ -37,9 +37,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
   } else if (cond3 == false && max_allowed > 0) {
-    return {status: false, error: "Please provide an amount between " + min_allowed.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + max_allowed_bis.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond3 == false) {
-    return {status: false, error: "Please provide an amount greater than " + min_allowed.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else {
     return { status: true };
   }
@@ -140,9 +140,9 @@ var available_amount = calculate_withdrawable(base_salary, requested_amount, wit
 
 if (max_allowed > 0) {
   var max_allowed_bis = Math.min(max_allowed, available_amount);
-  var request_amount = '<span class="amount-info-message">Amount should be between <span>' + min_allowed.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + max_allowed_bis.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 } else {
-  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + min_allowed.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 }
 $(request_amount).insertAfter("#kn-input-field_18 label");
 
