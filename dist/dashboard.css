@@ -21,13 +21,6 @@
   background-color: #f8f8f8 !important;
 }
 
-.kn-scenes.kn-section {
-  padding: 60px 0px;
-  max-width: 330px;
-  width: 100%;
-  margin: auto;
-}
-
 @media only screen and (max-width: 768px) {
   .kn-scenes.kn-section {
     padding: 72px 0px 60px 0px;
