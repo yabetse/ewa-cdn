@@ -20,13 +20,13 @@ requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
 // Payoff and Cutoff Dates
 var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
 
-let monthIndex = -1;
-let payday = "-";
-let cutoff_day = "-";
+var monthIndex = -1;
+var payday = "-";
+var cutoff_day = "-";
 
-let months = $("#view_68 .kn-detail.field_88 .kn-detail-body span span span");
-let payOffs = $("#view_68 .kn-detail.field_76 .kn-detail-body span span span");
-let cutOffs = $("#view_68 .kn-detail.field_82 .kn-detail-body span span span");
+var months = $("#view_68 .kn-detail.field_88 .kn-detail-body span span span");
+var payOffs = $("#view_68 .kn-detail.field_76 .kn-detail-body span span span");
+var cutOffs = $("#view_68 .kn-detail.field_82 .kn-detail-body span span span");
 
 $(months).each(function (index) {
   if ($(this).text() === current_month) {
