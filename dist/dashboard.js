@@ -19,8 +19,24 @@ requests_check = function (cutoff_day, nb_requests, max_nb_requests) {
 
 // Payoff and Cutoff Dates
 var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+var payday = "-";
+var cutoff_day = "-";
 
-var monthIndex = -1;
+var months = $("#view_96 .kn-table tbody td.field_88 span");
+var paydays = $("#view_96 .kn-table tbody td.field_76 span");
+var cutoffs = $("#view_96 .kn-table tbody td.field_82 span");
+
+$.each(months, function(i,v) {
+  if (v.textContent.trim() == current_month) {
+    payday = paydays[i].textContent.trim();
+    cutoff_day = cutoffs[i].textContent.trim();
+  }
+});
+
+var payday = payday == "" ? "-" : payday;
+var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
+
+/* var monthIndex = -1;
 var payday = "-";
 var cutoff_day = "-";
 
@@ -31,7 +47,6 @@ var cutOffs = $("#view_68 .kn-detail.field_82 .kn-detail-body span span span");
 $(months).each(function (index) {
   if ($(this).text() === current_month) {
     monthIndex = index;
-
     return false;
   }
 });
@@ -40,7 +55,6 @@ if (payOffs.length) {
   $(payOffs).each(function (index) {
     if (index === monthIndex) {
       payday = $(this).text();
-
       return false;
     }
   });
@@ -51,12 +65,11 @@ if (cutOffs.length) {
     function (index) {
       if (index === monthIndex) {
         cutoff_day = $(this).text();
-
         return false;
       }
     }
   )
-}
+} */
 
 // Withdrawable Amount and Other Conditions
 
