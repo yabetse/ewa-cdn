@@ -74,30 +74,6 @@ var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().
 var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_91 .kn-detail-body").text().replace(/,/g, ""));
 var input_val = 0;
 
-/* var cutoffs = Array();
-$("#view_64 .kn-detail.field_82 .kn-detail-body span span span").each(function () {
-    cutoffs.push($(this).text());
-  }
-);
-
-var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
-var months = Array();
-$("#view_64 .kn-detail.field_88 .kn-detail-body span span span").each(
-  function () {
-    months.push($(this).text());
-  }
-);
-
-for (var i = 0; i < months.length; i++) {
-  if (months[i] == current_month) {
-    var cutoff_day = cutoffs[i];
-  }
-}
-
-if (cutoffs.length == 0) {
-  var cutoff_day = "-";
-} */
-
 var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
 var cutoff_day = "-";
 
