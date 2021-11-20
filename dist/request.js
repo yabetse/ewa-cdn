@@ -132,6 +132,14 @@ if (speed.toLowerCase().indexOf("normal") > -1) {
 $("#view_60 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
 
+if (max_allowed > 0) {
+  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+  var request_amount = '<span class="amount-info-message">Amount should be between <span>' + min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + max_allowed_bis.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+} else {
+  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + min_allowed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+}
+$(request_amount).insertAfter("#kn-input-field_18 label");
+
 $("input[type=radio][name=view_60-field_92]").change(function () {
   var input_val = $("#field_18").val();
   var speed = $('input[name="view_60-field_92"]:checked').val();
