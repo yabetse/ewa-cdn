@@ -60,7 +60,7 @@ display_message = function (json_obj) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
     $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_60 form ul"));
-    // setTimeout(hide_error, 5000);
+    setTimeout(hide_error, 5000);
   }
 
   if (json_obj["status"] == true) {
@@ -71,7 +71,6 @@ display_message = function (json_obj) {
   } else {
     $("#view_60 .kn-button.is-primary").prop("disabled", true);
   }
-  setTimeout(hide_error, 5000);
 };
 
 $(document).on("knack-form-submit.view_60", function (event, view, record) {
