@@ -73,6 +73,63 @@ display_message = function (json_obj) {
   }
 };
 
+// Add placeholders + classes to the form view (view_60)
+
+($('.view_60 form #field_18').attr("placeholder", "Amount"));
+($('.view_60 form #field_80').attr("placeholder", "Withdrawal Remark"));
+
+var normal_fee_setting = parseFloat($("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, ""));
+var fast_fee_setting = parseFloat($("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, ""));
+
+var normal_withdrawal_speed = $("#view_64 .field_96 .kn-detail-body").text();
+var fast_withdrawal_speed = $("#view_64 .field_97 .kn-detail-body").text();
+
+if (normal_fee_setting == 0) {
+    var normal_fee_message = "There is no service fee";
+} else {
+    var normal_fee_message = "There is a fee of " + normal_fee_setting + " Baht per disbursement";
+}
+
+if (fast_fee_setting == 0) {
+    var fast_fee_message = "There is no service fee";
+} else {
+    var fast_fee_message = "There is a fee of " + fast_fee_setting + " Baht per disbursement";
+}
+
+$('.view_60 form .kn-input .kn-radio .control').each(function () {
+    let radioContent = $(this).find('.option.radio div');
+    let radioContentText = $(radioContent).text().trim().split('-');
+
+    if ($(radioContent).text().toLowerCase().indexOf("normal") > -1) {
+        $(this).addClass("selected");
+        var fee_message = normal_fee_message;
+        var withdrawal_speed = normal_withdrawal_speed;
+    } else {
+      var fee_message = fast_fee_message;
+      var withdrawal_speed = fast_withdrawal_speed;
+    }
+
+    let newContentTemplate = `
+        <div>
+            <span class='widthdrawl-radio'>
+                <span class='wr-title'>${radioContentText[0]}</span>
+                <span class='wr-desc'>${radioContentText[1].replace('{withdrawal_fee}', fee_message).replace('{withdrawal_speed}', withdrawal_speed)}</span>
+            </span>
+        </div>
+    `;
+    $(radioContent).html(newContentTemplate);
+});
+
+$('.view_60 form .kn-radio input[type=radio][name=view_60-field_92]').change(function (e) {
+    $('.view_60 form .kn-radio input').each(function () {
+        $(this).closest('.control').removeClass('selected');
+    });
+
+    if (!$(e.target).closest('.control').hasClass('selected'))
+        $(e.target).closest('.control').addClass('selected');
+});
+
+// Hide error and validation message on form submit
 $(document).on("knack-form-submit.view_60", function (event, view, record) {
   $(".error-message-custom").hide();
   $(".validation-message-custom").hide();
