@@ -26,9 +26,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   // condition3: input in range
   var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
   if (max_allowed > 0) {
-    var cond3 = input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
+    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
   } else {
-    var cond3 = input_val >= min_allowed && input_val <= withdrawable_amount;
+    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
   }
 
   // condition4: remaining balance is lower than the minimum withdrawal amount allowed
