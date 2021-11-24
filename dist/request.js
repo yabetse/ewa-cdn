@@ -59,24 +59,24 @@ display_message = function (json_obj) {
     var error_msg = json_obj["error"];
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
-    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_60 form ul"));
+    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_105 form ul"));
     // setTimeout(hide_error, 5000);
   }
 
   if (json_obj["status"] == true) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
-    $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_60 form ul"));
-    $("#view_60 .kn-button.is-primary").prop("disabled", false);
+    $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_105 form ul"));
+    $("#view_105 .kn-button.is-primary").prop("disabled", false);
   } else {
-    $("#view_60 .kn-button.is-primary").prop("disabled", true);
+    $("#view_105 .kn-button.is-primary").prop("disabled", true);
   }
 };
 
-// Add placeholders + classes to the form view (view_60)
+// Add placeholders + classes to the form view (view_105)
 
-($('.view_60 form #field_18').attr("placeholder", "Amount"));
-($('.view_60 form #field_80').attr("placeholder", "Withdrawal Remark"));
+($('.view_105 form #field_18').attr("placeholder", "Amount"));
+($('.view_105 form #field_80').attr("placeholder", "Withdrawal Remark"));
 
 var normal_fee_setting = parseFloat($("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, ""));
 var fast_fee_setting = parseFloat($("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, ""));
@@ -96,7 +96,7 @@ if (fast_fee_setting == 0) {
     var fast_fee_message = "There is a fee of " + fast_fee_setting + " Baht per disbursement";
 }
 
-$('.view_60 form .kn-input .kn-radio .control').each(function () {
+$('.view_105 form .kn-input .kn-radio .control').each(function () {
     let radioContent = $(this).find('.option.radio div');
     let radioContentText = $(radioContent).text().trim().split('-');
 
@@ -120,8 +120,8 @@ $('.view_60 form .kn-input .kn-radio .control').each(function () {
     $(radioContent).html(newContentTemplate);
 });
 
-$('.view_60 form .kn-radio input[type=radio][name=view_60-field_92]').change(function (e) {
-    $('.view_60 form .kn-radio input').each(function () {
+$('.view_105 form .kn-radio input[type=radio][name=view_105-field_92]').change(function (e) {
+    $('.view_105 form .kn-radio input').each(function () {
         $(this).closest('.control').removeClass('selected');
     });
 
@@ -130,13 +130,13 @@ $('.view_60 form .kn-radio input[type=radio][name=view_60-field_92]').change(fun
 });
 
 // Hide error and validation message on form submit
-$(document).on("knack-form-submit.view_60", function (event, view, record) {
+$(document).on("knack-form-submit.view_105", function (event, view, record) {
   $(".error-message-custom").hide();
   $(".validation-message-custom").hide();
 });
 
 // Disable the Submission Button
-$("#view_60 .kn-button.is-primary").prop("disabled", true);
+$("#view_105 .kn-button.is-primary").prop("disabled", true);
 
 // Variables for Global Conditions
 var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
@@ -192,13 +192,13 @@ if (max_allowed_employee > 0 && max_allowed_company > 0) {
 }
 
 // Get withdrawal fee value
-var speed = $('input[name="view_60-field_92"]:checked').val();
+var speed = $('input[name="view_105-field_92"]:checked').val();
 if (speed.toLowerCase().indexOf("normal") > -1) {
   var withdrawal_fee = normal_fee_setting;
 } else if (speed.toLowerCase().indexOf("fast") > -1) {
   var withdrawal_fee = fast_fee_setting;
 }
-$("#view_60 #field_63").attr("value", withdrawal_fee);
+$("#view_105 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
 
 if (max_allowed > 0) {
@@ -209,15 +209,15 @@ if (max_allowed > 0) {
 }
 $(request_amount).insertAfter("#kn-input-field_18 label");
 
-$("input[type=radio][name=view_60-field_92]").change(function () {
+$("input[type=radio][name=view_105-field_92]").change(function () {
   var input_val = $("#field_18").val();
-  var speed = $('input[name="view_60-field_92"]:checked').val();
+  var speed = $('input[name="view_105-field_92"]:checked').val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
     withdrawal_fee = fast_fee_setting;
   }
-  $("#view_60 #field_63").attr("value", withdrawal_fee);
+  $("#view_105 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
@@ -225,7 +225,7 @@ $("input[type=radio][name=view_60-field_92]").change(function () {
 
 $("input#field_18").on("input", function (e) {
   var input_val = $(this).val();
-  var speed = $('input[name="view_60-field_92"]:checked').val();
+  var speed = $('input[name="view_105-field_92"]:checked').val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
