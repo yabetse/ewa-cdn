@@ -120,3 +120,8 @@
 #kn-scene_11 .kn-table ::-webkit-scrollbar {
     display: none;
 }
+
+#view_124 {
+    margin: auto;
+    margin-top: 30px;
+}
