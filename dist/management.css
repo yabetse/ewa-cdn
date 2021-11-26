@@ -107,14 +107,16 @@
     margin-bottom: 30px;
 }
 
-#view_98, #view_42 {
+#view_98, #view_42, #view_115 {
     margin-bottom: 30px !important;
+}
+
+#view_42 {
     margin-top: 30px !important;
 }
 
 #view_101 {
-    align-self: center;
-    padding: 50px 0;
+    padding-top: 50px;
 }
 
 #kn-scene_11 .kn-table ::-webkit-scrollbar {
@@ -124,4 +126,10 @@
 #view_124 {
     margin: auto;
     margin-top: 30px;
+}
+
+#view_126 .content {
+    display: flex;
+    float: right;
+    margin-bottom: 30px;
 }
