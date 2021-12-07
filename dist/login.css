@@ -231,7 +231,8 @@
 .country-code {
   font-family: "Inter" !important;
   padding: 14px 12px;
-  border-right: 1.5px solid #ccc;
+  border: none;
+  background: #ECECEC;
   font-size: 14px;
 }
 
