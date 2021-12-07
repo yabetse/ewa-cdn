@@ -1,14 +1,39 @@
 // Custom validation for Thai phone number
 $.validator.addMethod(
-  "thaiPhone",
+  "phoneValidation",
   function (value, element) {
     value = value.replace(/\s+/g, "");
 
-    // Regex for Thai phone - /(\+66)(\d{1,2}\-?\d{3}\-?\d{3,4})/
+    // Thai Phone
+    if ($('#country-code-login').val() == "66") {
+      return (
+        this.optional(element) ||
+        (value.length == 9 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
+        (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
+      );
+    }
+    // Malaysian Phone
+    else if ($('#country-code-login').val() == "60") {
+      return (
+        this.optional(element) ||
+        (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
+        (value.length == 11 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
+      );
+    }
+  },
+  "Please enter a valid phone number"
+);
+
+// Custom validation for Malaysian phone number
+$.validator.addMethod(
+  "malaysianPhone",
+  function (value, element) {
+    value = value.replace(/\s+/g, "");
+
     return (
       this.optional(element) ||
-      (value.length == 9 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
-      (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/))
+      (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
+      (value.length == 11 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
     );
   },
   "Please enter a valid phone number"
@@ -132,7 +157,7 @@ var $phoneNumValidator = $("#otp-input-form").validate({
   rules: {
     phone_number: {
       required: true,
-      thaiPhone: true,
+      phoneValidation: true,
     },
   },
   messages: {
