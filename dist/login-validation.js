@@ -20,6 +20,13 @@ $.validator.addMethod(
         (value.length == 11 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
       );
     }
+    // Tunisian Phone
+    else if ($('#country-code-login').val() == "216") {
+      return (
+        this.optional(element) ||
+        (value.length == 8 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/))
+      );
+    }
   },
   "Please enter a valid phone number"
 );
