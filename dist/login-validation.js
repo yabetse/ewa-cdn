@@ -60,7 +60,8 @@ function sendOTP(callback) {
   $("#kn-loading-spinner").show();
 
   // 66-[9 digit number]
-  let phoneNr = "66".concat($("#phone_number").val().replace(/^0+/, ''));
+  var country_code = $('#country-code-login').val();
+  let phoneNr = country_code.concat($("#phone_number").val().replace(/^0+/, ''));
 
   // set phone number to OTP entry
   $("#otpNumber").text("+".concat(phoneNr));
@@ -78,7 +79,9 @@ function sendOTP(callback) {
 // Submit OTP and login
 function submitOTP() {
   let OTPCode = $("input#otp_code").val();
-  let phoneNr = "66".concat($("#phone_number").val().replace(/^0+/, ''));
+
+  var country_code = $('#country-code-login').val();
+  let phoneNr = country_code.concat($("#phone_number").val().replace(/^0+/, ''));
 
   $("#kn-loading-spinner").show();
   disableOTPEntryClickEvents();
