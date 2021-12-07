@@ -27,7 +27,6 @@
 .form-input-wrapper {
   width: 100%;
   margin: 0px auto 8px auto;
-  padding: 14px 12px;
   background: white;
   border-radius: 4px;
   display: flex;
@@ -231,9 +230,13 @@
 
 .country-code {
   font-family: "Inter" !important;
-  padding-right: 14px;
+  padding: 14px 12px;
   border-right: 1.5px solid #ccc;
   font-size: 14px;
+}
+
+#phone_number {
+  padding: 14px 12px;
 }
 
 #otpNumber {
