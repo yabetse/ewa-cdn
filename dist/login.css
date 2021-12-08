@@ -237,6 +237,11 @@
   font-size: 14px;
 }
 
+.country-code {
+  border: none;
+  background: transparent;
+}
+
 #phone_number {
   padding: 14px 12px;
 }
