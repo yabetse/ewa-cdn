@@ -58,7 +58,7 @@ var html = '<section id="custom-view-scene1">' +
   '<div>' +
   '<div class="payday-label">Next Payday</div>' +
   '<div class="payday-value">' + payday + '</div>' +
-  '<span class="cutoff-message"><i>Withdrawals until ' + cutoff_day + '</i></span>' +
+  '<span class="cutoff-message"><i>Cut-off at ' + cutoff_day + '</i></span>' +
   '</div>' +
   '<img src="https://ewa-services.com/ewa/images/ico-calendar.svg"/>' +
   '</div>' +
