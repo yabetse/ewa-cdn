@@ -1,6 +1,16 @@
-#view_97, #view_105, #view_133 {
+#view_97, #view_105, #view_133,
+#view_133 #kn-input-field_18,
+#view_133 #kn-input-field_59,
+#view_133 #kn-input-field_92,
+#view_133 #kn-input-field_80 {
   visibility: hidden;
   position: absolute;
+}
+
+#view_133 .kn-submit,
+#view_133 .buttons-wrapper #back-cutoff-btn,
+#view_133 .buttons-wrapper #submit-cutoff-btn {
+  display: none;
 }
 
 #view_105 #kn-input-field_92 div.kn-radio .control:nth-child(3) {

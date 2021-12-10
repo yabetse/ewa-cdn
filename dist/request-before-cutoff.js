@@ -103,7 +103,7 @@ if (fast_fee_setting == 0) {
 if (cutoff_fee_setting == 0) {
   var cutoff_fee_message = "There is no service fee";
 } else {
-  var cutoff_fee_message = "There is a fee of " + fast_fee_setting + " " + currency + " per disbursement";
+  var cutoff_fee_message = "There is a fee of " + cutoff_fee_setting + " " + currency + " per disbursement";
 }
 
 $('.view_105 form .kn-input .kn-radio .control').each(function () {

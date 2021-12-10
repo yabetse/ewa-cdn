@@ -4,74 +4,112 @@ hide_error = function () {
 };
 
 calculate_withdrawable = function (base_salary, requested_amount, withdrawable_threshold) {
-var current_date = new Date();
-var mtd = current_date.getDate() - 1;
-var tot = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate();
-var balance = (base_salary * mtd) / tot;
-var available_amount = (balance - requested_amount) * withdrawable_threshold;
-return available_amount;
+  var current_date = new Date();
+  var mtd = current_date.getDate() - 1;
+  var tot = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate();
+  var balance = (base_salary * mtd) / tot;
+  var available_amount = (balance - requested_amount) * withdrawable_threshold;
+  return available_amount;
 };
 
 amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
-// condition1 : cutoff date
-if (cutoff_day == "-") {
-  var cond1 = false;
-} else {
-  var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
-}
+  // condition1 : cutoff date
+  if (cutoff_day == "-") {
+    var cond1 = false;
+  } else {
+    var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
+  }
 
-// condition2: total number of requests per month
-var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
+  // condition2: total number of requests per month
+  var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
-// condition3: input in range
-var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
-if (max_allowed > 0) {
-  var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
-} else {
-  var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
-}
+  // condition3: input in range
+  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+  if (max_allowed > 0) {
+    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
+  } else {
+    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
+  }
 
-// condition4: remaining balance is lower than the minimum withdrawal amount allowed
-if (max_allowed_bis < min_allowed) {
-  var cond4 = false;
-} else {
-  var cond4 = true;
-}
+  // condition4: remaining balance is lower than the minimum withdrawal amount allowed
+  if (max_allowed_bis < min_allowed) {
+    var cond4 = false;
+  } else {
+    var cond4 = true;
+  }
 
-// compiling all
-if (cond1 == false) {
-  return {status: false, error: "Please wait until next month to submit new requests"};
-} else if (cond2 == false) {
-  return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
-} else if (cond3 == false && max_allowed > 0) {
-  return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-} else if (cond3 == false) {
-  return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-} else if (cond4 == false) {
-  return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
-} else {
-  return { status: true };
-}
+  // compiling all
+  if (cond1 == false) {
+    return {status: false, error: "Please wait until next month to submit new requests"};
+  } else if (cond2 == false) {
+    return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
+  } else if (cond3 == false && max_allowed > 0) {
+    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond3 == false) {
+    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond4 == false) {
+    return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
+  } else {
+    return { status: true };
+  }
 };
 
 display_message = function (json_obj) {
-if (json_obj["status"] == false) {
-  var error_msg = json_obj["error"];
-  $(".error-message-custom").hide();
-  $(".validation-message-custom").hide();
-  $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_133 form ul"));
-  // setTimeout(hide_error, 5000);
+  if (json_obj["status"] == false) {
+    var error_msg = json_obj["error"];
+    $(".error-message-custom").hide();
+    $(".validation-message-custom").hide();
+    $("<div class='error-message-custom'><strong>" + error_msg + "</strong></div>").insertBefore($("#view_133 form ul"));
+    // setTimeout(hide_error, 5000);
+  }
+
+  if (json_obj["status"] == true) {
+    $(".error-message-custom").hide();
+    $(".validation-message-custom").hide();
+    $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form ul"));
+    $("#view_133 .kn-button.is-primary").prop("disabled", false);
+  } else {
+    $("#view_133 .kn-button.is-primary").prop("disabled", true);
+  }
+};
+
+// Append a "Proceed" button to the form
+
+var buttons_html = `<div class="buttons-wrapper">
+                        <button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>
+                        <button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>
+                        <button id='submit-cutoff-btn' onclick='submit_form()'>Submit</button>
+                    </div>`;
+
+$(buttons_html).insertAfter("#view_133 #kn-input-field_119");
+
+proceed_to_form = function() {
+  $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
+  $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
+  $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
+  $("#view_133 #kn-input-field_80").css({"visibility":"unset", "position":"unset"});
+
+  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"})
+
+  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"})
+  $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"unset"})
 }
 
-if (json_obj["status"] == true) {
-  $(".error-message-custom").hide();
-  $(".validation-message-custom").hide();
-  $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form ul"));
-  $("#view_133 .kn-button.is-primary").prop("disabled", false);
-} else {
-  $("#view_133 .kn-button.is-primary").prop("disabled", true);
+back_from_form = function() {
+  $("#view_133 #kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
+  $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
+  $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
+  $("#view_133 #kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
+
+  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"})
+
+  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"})
+  $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"none"})
 }
-};
+
+submit_form = function() {
+  $('#view_133 .kn-submit button').click();
+}
 
 // Add placeholders + classes to the form view (view_133)
 
@@ -101,9 +139,9 @@ if (fast_fee_setting == 0) {
 }
 
 if (cutoff_fee_setting == 0) {
-var cutoff_fee_message = "There is no service fee";
+  var cutoff_fee_message = "There is no service fee";
 } else {
-var cutoff_fee_message = "There is a fee of " + fast_fee_setting + " " + currency + " per disbursement";
+  var cutoff_fee_message = "There is a fee of " + cutoff_fee_setting + " " + currency + " per disbursement";
 }
 
 $('.view_133 form .kn-input .kn-radio .control').each(function () {
@@ -111,7 +149,6 @@ $('.view_133 form .kn-input .kn-radio .control').each(function () {
   let radioContentText = $(radioContent).text().trim().split('-');
 
   if ($(radioContent).text().toLowerCase().indexOf("normal") > -1) {
-      $(this).addClass("selected");
       var fee_message = normal_fee_message;
       var withdrawal_speed = normal_withdrawal_speed;
       var speed_type = "normal";
@@ -120,6 +157,7 @@ $('.view_133 form .kn-input .kn-radio .control').each(function () {
     var withdrawal_speed = fast_withdrawal_speed;
     var speed_type = "fast";
   } else {
+    $(this).addClass("selected");
     var fee_message = cutoff_fee_message;
     var withdrawal_speed = cutoff_withdrawal_speed;
     var speed_type = "cutoff";
@@ -147,8 +185,8 @@ $('.view_133 form .kn-radio input[type=radio][name=view_133-field_92]').change(f
 
 // Hide error and validation message on form submit
 $(document).on("knack-form-submit.view_133", function (event, view, record) {
-$(".error-message-custom").hide();
-$(".validation-message-custom").hide();
+  $(".error-message-custom").hide();
+  $(".validation-message-custom").hide();
 });
 
 // Disable the Submission Button
@@ -185,72 +223,72 @@ var min_allowed_company = parseFloat($("#view_64 .field_87 .kn-detail-body").tex
 var max_allowed_company = parseFloat($("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, ""));
 
 if (min_allowed_employee > 0 && min_allowed_company > 0) {
-var min_allowed = Math.max(min_allowed_employee, min_allowed_company);
+  var min_allowed = Math.max(min_allowed_employee, min_allowed_company);
 } else if (min_allowed_employee > 0) {
-var min_allowed = min_allowed_employee;
+  var min_allowed = min_allowed_employee;
 } else if (min_allowed_company > 0) {
-var min_allowed = min_allowed_company;
+  var min_allowed = min_allowed_company;
 } else {
-var min_allowed = 0;
+  var min_allowed = 0;
 }
 
 if (max_allowed_employee > 0 && max_allowed_company > 0) {
-var max_allowed = Math.min(max_allowed_employee, max_allowed_company);
+  var max_allowed = Math.min(max_allowed_employee, max_allowed_company);
 } else if (max_allowed_employee > 0) {
-var max_allowed = max_allowed_employee;
+  var max_allowed = max_allowed_employee;
 } else if (max_allowed_company > 0) {
-var max_allowed = max_allowed_company;
+  var max_allowed = max_allowed_company;
 } else {
-var max_allowed = 0;
+  var max_allowed = 0;
 }
 
 // Get withdrawal fee value
 var speed = $('input[name="view_133-field_92"]:checked').val();
 if (speed.toLowerCase().indexOf("normal") > -1) {
-var withdrawal_fee = normal_fee_setting;
+  var withdrawal_fee = normal_fee_setting;
 } else if (speed.toLowerCase().indexOf("fast") > -1) {
-var withdrawal_fee = fast_fee_setting;
+  var withdrawal_fee = fast_fee_setting;
 } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
-var withdrawal_fee = cutoff_fee_setting;
+  var withdrawal_fee = cutoff_fee_setting;
 }
 $("#view_133 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
 
 if (max_allowed > 0) {
-var max_allowed_bis = Math.min(max_allowed, available_amount);
-var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  var max_allowed_bis = Math.min(max_allowed, available_amount);
+  var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 } else {
-var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 }
 $(request_amount).insertAfter("#kn-input-field_18 label");
 
 $("input[type=radio][name=view_133-field_92]").change(function () {
-var input_val = $("#field_18").val();
-var speed = $('input[name="view_133-field_92"]:checked').val();
-if (speed.toLowerCase().indexOf("normal") > -1) {
-  withdrawal_fee = normal_fee_setting;
-} else if (speed.toLowerCase().indexOf("fast") > -1) {
-  withdrawal_fee = fast_fee_setting;
-} else if (speed.toLowerCase().indexOf("cutoff") > -1) {
-  withdrawal_fee = cutoff_fee_setting;
-}
-$("#view_133 #field_63").attr("value", withdrawal_fee);
-available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
-display_message(output);
+  var input_val = $("#field_18").val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  $("#view_133 #field_63").attr("value", withdrawal_fee);
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
 });
 
 $("input#field_18").on("input", function (e) {
-var input_val = $(this).val();
-var speed = $('input[name="view_133-field_92"]:checked').val();
-if (speed.toLowerCase().indexOf("normal") > -1) {
-  withdrawal_fee = normal_fee_setting;
-} else if (speed.toLowerCase().indexOf("fast") > -1) {
-  withdrawal_fee = fast_fee_setting;
-} else if (speed.toLowerCase().indexOf("cutoff") > -1) {
-  withdrawal_fee = cutoff_fee_setting;
-}
-available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
-display_message(output);
+  var input_val = $(this).val();
+  var speed = $('input[name="view_133-field_92"]:checked').val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
 });
