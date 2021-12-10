@@ -78,22 +78,32 @@ display_message = function (json_obj) {
 ($('.view_105 form #field_18').attr("placeholder", "Amount"));
 ($('.view_105 form #field_80').attr("placeholder", "Withdrawal Remark"));
 
+var currency = $("#view_64 .field_122 .kn-detail-body").text();
+
 var normal_fee_setting = parseFloat($("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, ""));
 var fast_fee_setting = parseFloat($("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, ""));
+var cutoff_fee_setting = parseFloat($("#view_64 .field_120 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_120 .kn-detail-body").text().replace(/,/g, ""));
 
 var normal_withdrawal_speed = $("#view_64 .field_96 .kn-detail-body").text();
 var fast_withdrawal_speed = $("#view_64 .field_97 .kn-detail-body").text();
+var cutoff_withdrawal_speed = $("#view_64 .field_121 .kn-detail-body").text();
 
 if (normal_fee_setting == 0) {
     var normal_fee_message = "There is no service fee";
 } else {
-    var normal_fee_message = "There is a fee of " + normal_fee_setting + " Baht per disbursement";
+    var normal_fee_message = "There is a fee of " + normal_fee_setting + " " + currency + " per disbursement";
 }
 
 if (fast_fee_setting == 0) {
     var fast_fee_message = "There is no service fee";
 } else {
-    var fast_fee_message = "There is a fee of " + fast_fee_setting + " Baht per disbursement";
+    var fast_fee_message = "There is a fee of " + fast_fee_setting + " " + currency + " per disbursement";
+}
+
+if (cutoff_fee_setting == 0) {
+  var cutoff_fee_message = "There is no service fee";
+} else {
+  var cutoff_fee_message = "There is a fee of " + fast_fee_setting + " " + currency + " per disbursement";
 }
 
 $('.view_105 form .kn-input .kn-radio .control').each(function () {
@@ -104,13 +114,19 @@ $('.view_105 form .kn-input .kn-radio .control').each(function () {
         $(this).addClass("selected");
         var fee_message = normal_fee_message;
         var withdrawal_speed = normal_withdrawal_speed;
-    } else {
+        var speed_type = "normal";
+    } else if ($(radioContent).text().toLowerCase().indexOf("fast") > -1) {
       var fee_message = fast_fee_message;
       var withdrawal_speed = fast_withdrawal_speed;
+      var speed_type = "fast";
+    } else {
+      var fee_message = cutoff_fee_message;
+      var withdrawal_speed = cutoff_withdrawal_speed;
+      var speed_type = "cutoff";
     }
 
     let newContentTemplate = `
-        <div>
+        <div class='${speed_type}'>
             <span class='widthdrawl-radio'>
                 <span class='wr-title'>${radioContentText[0]}</span>
                 <span class='wr-desc'>${radioContentText[1].replace('{withdrawal_fee}', fee_message).replace('{withdrawal_speed}', withdrawal_speed)}</span>
@@ -168,9 +184,6 @@ var max_allowed_employee = parseFloat($("#view_65 .field_53 .kn-detail-body").te
 var min_allowed_company = parseFloat($("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, ""));
 var max_allowed_company = parseFloat($("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, ""));
 
-var normal_fee_setting = parseFloat($("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_93 .kn-detail-body").text().replace(/,/g, ""));
-var fast_fee_setting = parseFloat($("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_94 .kn-detail-body").text().replace(/,/g, ""));
-
 if (min_allowed_employee > 0 && min_allowed_company > 0) {
   var min_allowed = Math.max(min_allowed_employee, min_allowed_company);
 } else if (min_allowed_employee > 0) {
@@ -197,6 +210,8 @@ if (speed.toLowerCase().indexOf("normal") > -1) {
   var withdrawal_fee = normal_fee_setting;
 } else if (speed.toLowerCase().indexOf("fast") > -1) {
   var withdrawal_fee = fast_fee_setting;
+} else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+  var withdrawal_fee = cutoff_fee_setting;
 }
 $("#view_105 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
@@ -216,6 +231,8 @@ $("input[type=radio][name=view_105-field_92]").change(function () {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
     withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
   }
   $("#view_105 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
@@ -230,6 +247,8 @@ $("input#field_18").on("input", function (e) {
     withdrawal_fee = normal_fee_setting;
   } else if (speed.toLowerCase().indexOf("fast") > -1) {
     withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
   }
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
