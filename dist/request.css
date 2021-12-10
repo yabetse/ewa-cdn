@@ -1,6 +1,15 @@
-#view_97, #view_133, #view_105 div.cutoff, #view_133 div.normal, #view_133 div.fast {
+#view_97, #view_133 {
   visibility: hidden;
   position: absolute;
+}
+
+#view_105 #kn-input-field_92 div.kn-radio .control:nth-child(3) {
+  display: none;
+}
+
+#view_133 #kn-input-field_92 div.kn-radio .control:nth-child(1),
+#view_133 #kn-input-field_92 div.kn-radio .control:nth-child(2) {
+  display: none;
 }
 
 .view_105, .view_133 {
