@@ -78,7 +78,7 @@ display_message = function (json_obj) {
 var buttons_html = `<div class="buttons-wrapper">
                         <button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>
                         <button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>
-                        <button id='submit-cutoff-btn' onclick='submit_form()'>Submit</button>
+                        <button id='submit-cutoff-btn' onclick='submit_cutoff_form()'>Submit</button>
                     </div>`;
 
 $(buttons_html).insertAfter("#view_133 #kn-input-field_80");
@@ -111,7 +111,7 @@ back_from_form = function() {
   $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"none"})
 }
 
-submit_form = function() {
+submit_cutoff_form = function() {
   $('#view_133 .kn-submit button').click();
 }
 
