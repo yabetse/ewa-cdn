@@ -81,7 +81,7 @@ var buttons_html = `<div class="buttons-wrapper">
                         <button id='submit-cutoff-btn' onclick='submit_form()'>Submit</button>
                     </div>`;
 
-$(buttons_html).insertAfter("#view_133 #kn-input-field_119");
+$(buttons_html).insertAfter("#view_133 #kn-input-field_80");
 
 proceed_to_form = function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
@@ -108,7 +108,7 @@ back_from_form = function() {
 }
 
 submit_form = function() {
-  $('#view_133 .kn-submit button').click();
+  // $('#view_133 .kn-submit button').click();
 }
 
 // Add placeholders + classes to the form view (view_133)
