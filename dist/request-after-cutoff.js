@@ -88,6 +88,8 @@ proceed_to_form = function() {
   $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_80").css({"visibility":"unset", "position":"unset"});
+  $("#view_133 .kn-input-section_break").css({"visibility":"hidden", "position":"absolute"});
+  $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
 
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"})
 
@@ -100,6 +102,8 @@ back_from_form = function() {
   $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
+  $("#view_133 .kn-input-section_break").css({"visibility":"unset", "position":"unset"});
+  $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
 
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"})
 
@@ -108,7 +112,7 @@ back_from_form = function() {
 }
 
 submit_form = function() {
-  // $('#view_133 .kn-submit button').click();
+  $('#view_133 .kn-submit button').click();
 }
 
 // Add placeholders + classes to the form view (view_133)
