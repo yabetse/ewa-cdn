@@ -78,40 +78,36 @@ display_message = function (json_obj) {
 var buttons_html = `<div class="buttons-wrapper">
                         <button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>
                         <button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>
-                        <button id='submit-cutoff-btn' onclick='submit_cutoff_form'>Submit</button>
+                        <button id='submit-cutoff-btn' onclick='submit_cutoff_form()'>Submit</button>
                     </div>`;
 
 $(buttons_html).insertAfter("#view_133 #kn-input-field_80");
 
-proceed_to_form = function() {
+function proceed_to_form() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_80").css({"visibility":"unset", "position":"unset"});
   $("#view_133 .kn-input-section_break").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
-
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"})
-
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"})
   $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"unset"})
 }
 
-back_from_form = function() {
+function back_from_form() {
   $("#view_133 #kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 .kn-input-section_break").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
-
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"})
-
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"})
   $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"none"})
 }
 
-submit_cutoff_form = function() {
+function submit_cutoff_form() {
   $('#view_133 .kn-submit button').click();
 }
 
