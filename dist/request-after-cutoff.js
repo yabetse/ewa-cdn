@@ -13,41 +13,32 @@ calculate_withdrawable = function (base_salary, requested_amount, withdrawable_t
 };
 
 amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
-  // condition1 : cutoff date
-  if (cutoff_day == "-") {
-    var cond1 = false;
-  } else {
-    var cond1 = new Date() <= new Date(cutoff_day.split("/")[2], cutoff_day.split("/")[1] - 1, cutoff_day.split("/")[0]);
-  }
+  // condition1: total number of requests per month
+  var cond1 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
-  // condition2: total number of requests per month
-  var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
-
-  // condition3: input in range
+  // condition2: input in range
   var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
   if (max_allowed > 0) {
-    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
+    var cond2 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
   } else {
-    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
+    var cond2 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
   }
 
-  // condition4: remaining balance is lower than the minimum withdrawal amount allowed
+  // condition3: remaining balance is lower than the minimum withdrawal amount allowed
   if (max_allowed_bis < min_allowed) {
-    var cond4 = false;
+    var cond3 = false;
   } else {
-    var cond4 = true;
+    var cond3 = true;
   }
 
   // compiling all
   if (cond1 == false) {
-    return {status: false, error: "Please wait until next month to submit new requests"};
-  } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
-  } else if (cond3 == false && max_allowed > 0) {
+  } else if (cond2 == false && max_allowed > 0) {
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond3 == false) {
+  } else if (cond2 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond4 == false) {
+  } else if (cond3 == false) {
     return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
   } else {
     return { status: true };
@@ -174,14 +165,14 @@ $('.view_133 form .kn-input .kn-radio .control').each(function () {
   $(radioContent).html(newContentTemplate);
 });
 
-$('.view_133 form .kn-radio input[type=radio][name=view_133-field_92]').change(function (e) {
+/* $('.view_133 form .kn-radio input[type=radio][name=view_133-field_92]').change(function (e) {
   $('.view_133 form .kn-radio input').each(function () {
       $(this).closest('.control').removeClass('selected');
   });
 
   if (!$(e.target).closest('.control').hasClass('selected'))
       $(e.target).closest('.control').addClass('selected');
-});
+}); */
 
 // Hide error and validation message on form submit
 $(document).on("knack-form-submit.view_133", function (event, view, record) {

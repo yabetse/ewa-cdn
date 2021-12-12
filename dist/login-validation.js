@@ -16,8 +16,8 @@ $.validator.addMethod(
     else if ($('#country-code-login').val() == "60") {
       return (
         this.optional(element) ||
-        (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
-        (value.length == 11 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
+        (value.length == 9 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/)) ||
+        (value.length == 10 && value.match(/(\d{1,2}\-?\d{3}\-?\d{3,4})/) && value[0] == "0")
       );
     }
     // Tunisian Phone
