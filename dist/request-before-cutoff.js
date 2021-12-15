@@ -22,13 +22,22 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
 
   // condition2: total number of requests per month
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
-
+  
   // condition3: remaining balance is lower than the minimum withdrawal amount allowed
+  console.log("max_allowed_bis");
+  console.log(max_allowed_bis);
+
+  console.log("min_allowed");
+  console.log(min_allowed);
+
   if (max_allowed_bis < min_allowed) {
     var cond3 = false;
   } else {
     var cond3 = true;
   }
+
+  console.log("cond3");
+  console.log(cond3);
 
   // condition4: input in range
   var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
@@ -218,7 +227,11 @@ var available_amount = calculate_withdrawable(base_salary, requested_amount, wit
 
 if (max_allowed > 0) {
   var max_allowed_bis = Math.min(max_allowed, available_amount);
-  var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  if (max_allowed_bis >= min_allowed) {
+    var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  } else {
+    var request_amount = '<span class="amount-info-message">The remaining balance (<span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>) is lower than the minimum withdrawal amount allowed (<span>" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>)</span>";
+  }
 } else {
   var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 }
