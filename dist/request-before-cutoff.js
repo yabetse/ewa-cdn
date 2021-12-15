@@ -23,19 +23,19 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   // condition2: total number of requests per month
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
-  // condition3: input in range
-  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
-  if (max_allowed > 0) {
-    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis && input_val <= withdrawable_amount;
+  // condition3: remaining balance is lower than the minimum withdrawal amount allowed
+  if (max_allowed_bis < min_allowed) {
+    var cond3 = false;
   } else {
-    var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
+    var cond3 = true;
   }
 
-  // condition4: remaining balance is lower than the minimum withdrawal amount allowed
-  if (max_allowed_bis < min_allowed) {
-    var cond4 = false;
+  // condition4: input in range
+  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+  if (max_allowed > 0) {
+    var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis && input_val <= withdrawable_amount;
   } else {
-    var cond4 = true;
+    var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
   }
 
   // compiling all
@@ -43,12 +43,12 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
-  } else if (cond3 == false && max_allowed > 0) {
-    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond3 == false) {
-    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond4 == false) {
     return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
+  } else if (cond4 == false && max_allowed > 0) {
+    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond4 == false) {
+    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else {
     return { status: true };
   }
