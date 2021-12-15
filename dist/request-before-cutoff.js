@@ -13,6 +13,8 @@ calculate_withdrawable = function (base_salary, requested_amount, withdrawable_t
 };
 
 amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
+  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
+  
   // condition1 : cutoff date
   if (cutoff_day == "-") {
     var cond1 = false;
@@ -40,7 +42,6 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   console.log(cond3);
 
   // condition4: input in range
-  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
   if (max_allowed > 0) {
     var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis && input_val <= withdrawable_amount;
   } else {

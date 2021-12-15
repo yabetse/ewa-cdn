@@ -13,6 +13,10 @@ calculate_withdrawable = function (base_salary, requested_amount, withdrawable_t
 };
 
 amount_requested_checks = function (base_salary, employed_since_days, withdrawable_amount, min_allowed, max_allowed, max_cutoff_allowed, nb_requests, max_nb_requests, input_val) {
+  
+  var arr = [withdrawable_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
+  var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
+  
   // condition1: total number of requests per month
   var cond1 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
@@ -24,8 +28,6 @@ amount_requested_checks = function (base_salary, employed_since_days, withdrawab
   }
 
   // condition3: input in range
-  var arr = [withdrawable_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
-  var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
   var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis;
 
   // condition4: employee employed for 4 months or more
@@ -268,7 +270,11 @@ var available_amount = calculate_withdrawable(base_salary, requested_amount, wit
 
 if (max_allowed > 0) {
   var max_allowed_bis = Math.min(max_allowed, available_amount);
-  var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  if (max_allowed_bis >= min_allowed) {
+    var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
+  } else {
+    var request_amount = '<span class="amount-info-message">The remaining balance (<span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>) is lower than the minimum withdrawal amount allowed (<span>" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span>)</span>";
+  }
 } else {
   var request_amount = '<span class="amount-info-message">Amount should be greater than <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
 }
