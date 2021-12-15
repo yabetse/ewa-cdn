@@ -12,17 +12,14 @@ calculate_withdrawable = function (base_salary, requested_amount, withdrawable_t
   return available_amount;
 };
 
-amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowed, cutoff_day, nb_requests, max_nb_requests, input_val) {
+amount_requested_checks = function (base_salary, employed_since_days, withdrawable_amount, min_allowed, max_allowed, max_cutoff_allowed, nb_requests, max_nb_requests, input_val) {
   // condition1: total number of requests per month
   var cond1 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
   // condition2: input in range
-  var max_allowed_bis = Math.min(max_allowed, withdrawable_amount);
-  if (max_allowed > 0) {
-    var cond2 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed && input_val <= withdrawable_amount;
-  } else {
-    var cond2 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
-  }
+  var arr = [withdrawable_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
+  var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
+  var cond2 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis;
 
   // condition3: remaining balance is lower than the minimum withdrawal amount allowed
   if (max_allowed_bis < min_allowed) {
@@ -30,6 +27,9 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   } else {
     var cond3 = true;
   }
+
+  // condition4: employee employed for 4 months or more
+  var cond4 = employed_since_days >= 120;
 
   // compiling all
   if (cond1 == false) {
@@ -40,6 +40,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond3 == false) {
     return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
+  } else if (cond4 == false) {
+    return {status: false, error: "You are employed since " + employed_since_days + " days. You need to fulfill 120 days to be eligible to submit requests after cutiff days"};
   } else {
     return { status: true };
   }
@@ -149,6 +151,7 @@ $('.view_133 form .kn-input .kn-radio .control').each(function () {
     var speed_type = "fast";
   } else {
     $(this).addClass("selected");
+    $(this).find( "input" ).prop("checked", true);
     var fee_message = cutoff_fee_message;
     var withdrawal_speed = cutoff_withdrawal_speed;
     var speed_type = "cutoff";
@@ -210,8 +213,16 @@ var withdrawable_threshold = parseFloat($("#view_64 .field_89 .kn-detail-body").
 // Conditions Check Variables
 var min_allowed_employee = parseFloat($("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_52 .kn-detail-body").text().replace(/,/g, ""));
 var max_allowed_employee = parseFloat($("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_53 .kn-detail-body").text().replace(/,/g, ""));
+var max_cutoff_allowed_employee = parseFloat($("#view_65 .field_123 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_123 .kn-detail-body").text().replace(/,/g, ""));
+
 var min_allowed_company = parseFloat($("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_87 .kn-detail-body").text().replace(/,/g, ""));
 var max_allowed_company = parseFloat($("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_90 .kn-detail-body").text().replace(/,/g, ""));
+var max_cutoff_allowed_company = parseFloat($("#view_64 .field_124 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_64 .field_124 .kn-detail-body").text().replace(/,/g, ""));
+
+var employment_start_txt = $("#view_65 .field_78 .kn-detail-body").text().trim();
+var employment_start = new Date(employment_start_txt.split("/")[2], employment_start_txt.split("/")[1] - 1, employment_start_txt.split("/")[0]);
+var today = new Date();
+var employed_since_days = Math.ceil((today - employment_start) / (1000*60*60*24));
 
 if (min_allowed_employee > 0 && min_allowed_company > 0) {
   var min_allowed = Math.max(min_allowed_employee, min_allowed_company);
@@ -231,6 +242,16 @@ if (max_allowed_employee > 0 && max_allowed_company > 0) {
   var max_allowed = max_allowed_company;
 } else {
   var max_allowed = 0;
+}
+
+if (max_cutoff_allowed_employee > 0 && max_cutoff_allowed_company > 0) {
+  var max_cutoff_allowed = Math.min(max_cutoff_allowed_employee, max_cutoff_allowed_company);
+} else if (max_cutoff_allowed_employee > 0) {
+  var max_cutoff_allowed = max_cutoff_allowed_employee;
+} else if (max_cutoff_allowed_company > 0) {
+  var max_cutoff_allowed = max_cutoff_allowed_company;
+} else {
+  var max_cutoff_allowed = 0;
 }
 
 // Get withdrawal fee value
@@ -265,7 +286,7 @@ $("input[type=radio][name=view_133-field_92]").change(function () {
   }
   $("#view_133 #field_63").attr("value", withdrawal_fee);
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  var output = amount_requested_checks(base_salary, employed_since_days, available_amount, min_allowed, max_allowed, max_cutoff_allowed, requested_transactions, max_number_requests, input_val);
   display_message(output);
 });
 
@@ -280,6 +301,6 @@ $("input#field_18").on("input", function (e) {
     withdrawal_fee = cutoff_fee_setting;
   }
   available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
-  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  var output = amount_requested_checks(base_salary, employed_since_days, available_amount, min_allowed, max_allowed, max_cutoff_allowed, requested_transactions, max_number_requests, input_val);
   display_message(output);
 });
