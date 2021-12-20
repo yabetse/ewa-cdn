@@ -121,6 +121,8 @@
   color: white;
   text-decoration: none;
   font-size: 13px;
+  min-width: 91px;
+  text-align: center;
 }
 
 #custom-view-scene1 .max-withdrawable .max-amount-button .disabled {
