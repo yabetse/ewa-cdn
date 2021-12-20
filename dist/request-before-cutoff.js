@@ -67,7 +67,7 @@ display_message = function (json_obj) {
   if (json_obj["status"] == true) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
-    $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_105 form ul"));
+    $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_105 form > ul"));
     $("#view_105 .kn-button.is-primary").prop("disabled", false);
   } else {
     $("#view_105 .kn-button.is-primary").prop("disabled", true);
