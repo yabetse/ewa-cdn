@@ -268,8 +268,10 @@ if (speed.toLowerCase().indexOf("normal") > -1) {
 $("#view_133 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
 
+var arr = [available_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
+var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
+
 if (max_allowed > 0) {
-  var max_allowed_bis = Math.min(max_allowed, available_amount);
   if (max_allowed_bis >= min_allowed) {
     var request_amount = '<span class="amount-info-message">Amount should be between <span>' + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> and <span>' + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></span>';
   } else {

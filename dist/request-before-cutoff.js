@@ -26,20 +26,11 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
   
   // condition3: remaining balance is lower than the minimum withdrawal amount allowed
-  console.log("max_allowed_bis");
-  console.log(max_allowed_bis);
-
-  console.log("min_allowed");
-  console.log(min_allowed);
-
   if (max_allowed_bis < min_allowed) {
     var cond3 = false;
   } else {
     var cond3 = true;
   }
-
-  console.log("cond3");
-  console.log(cond3);
 
   // condition4: input in range
   if (max_allowed > 0) {
