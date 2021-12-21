@@ -194,18 +194,30 @@ var max_number_requests = parseFloat($("#view_64 .field_91 .kn-detail-body").tex
 var input_val = 0;
 
 var current_month = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
+var next_month = (new Date().getMonth() == 11
+               ? (new Date().getFullYear() + 1) + "-01"
+               : new Date().getFullYear() + "-" + (new Date().getMonth() + 2));
+
 var cutoff_day = "-";
 
 var months = $("#view_97 .kn-table tbody td.field_88 span");
 var cutoffs = $("#view_97 .kn-table tbody td.field_82 span");
+var paydays = $("#view_97 .kn-table tbody td.field_76 span");
 
 $.each(months, function(i,v) {
 if (v.textContent.trim() == current_month) {
   cutoff_day = cutoffs[i].textContent.trim();
+  payday = paydays[i].textContent.trim();
+} else if (v.textContent.trim() == next_month) {
+  next_payday = paydays[i].textContent.trim();
 }
 });
 
 var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
+var payday = payday == "" ? "-" : payday;
+var next_payday = next_payday == "" ? "-" : next_payday;
+
+$("#view_133 form .kn-input.kn-input-section_break.control p.kn-description").replaceWith($("#view_133 form .kn-input.kn-input-section_break.control p.kn-description").html().replace("{payday_current}", payday).replace("{payday_next}", next_payday));
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
