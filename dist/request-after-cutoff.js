@@ -281,6 +281,16 @@ $("#view_133 #field_63").attr("value", withdrawal_fee);
 var available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
 
 var arr = [available_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
+
+console.log("available amount:");
+console.log(available_amount);
+console.log("max allowed before cutoff:");
+console.log(max_allowed);
+console.log("max allowed after cutoff:");
+console.log(max_cutoff_allowed);
+console.log("10% of salary:");
+console.log(base_salary*0.1);
+
 var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
 
 if (max_allowed > 0) {

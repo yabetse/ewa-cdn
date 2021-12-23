@@ -256,7 +256,7 @@
 }
 
 #view_133 #next-cutoff-btn {
-  background: #027470;
+  background: #8E4842;
   border: none;
   border-radius: 6px;
   width: 100%;
@@ -279,7 +279,7 @@
 }
 
 #view_133 #submit-cutoff-btn {
-  background: #027470;
+  background: #8E4842;
   border: none;
   border-radius: 6px;
   width: 45%;
@@ -310,6 +310,6 @@
 
 #view_133 form .kn-section-break ul li {
   font-size: 16px;
-  color: #666666;
+  color: #000000;
   font-weight: 500;
 }
