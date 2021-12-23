@@ -215,3 +215,64 @@
 #kn-input-field_18 .amount-info-message span {
   color: #027470;
 }
+
+/* Post-Cutoff Withdrawals */
+
+#view_133 #kn-input-field_119 {
+  background: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+#view_133 #kn-input-field_119 canvas.jSignature {
+  background: #FFFFFF;
+}
+
+#view_133 #view_133-field_119 {
+  margin: 10px 0;
+}
+
+#view_133 #kn-input-field_119 > label {
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+#view_133 #kn-input-field_119 a.kn-sig-clear {
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+#view_133 #next-cutoff-btn {
+  background: #027470;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  color: #FFFFFF;
+  padding: 14px 12px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#view_133 form .kn-input.kn-input-section_break.control .kn-section-break h3 {
+  font-size: 28px;
+  color: #000000;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+#view_133 form .kn-input.kn-input-section_break.control .kn-section-break {
+  font-size: 16px;
+  color: #222222;
+  font-weight: 800;
+  font-weight: 300;
+}
+
+#view_133 form .kn-input.kn-input-section_break.control .kn-section-break ul {
+  list-style-type: disc;
+}
+
+#view_133 form .kn-input.kn-input-section_break.control .kn-section-break ul li {
+  font-size: 16px;
+  color: #666666;
+  font-weight: 500;
+}

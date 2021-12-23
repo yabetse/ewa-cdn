@@ -217,7 +217,7 @@ var cutoff_day = cutoff_day == "" ? "-" : cutoff_day;
 var payday = payday == "" ? "-" : payday;
 var next_payday = next_payday == "" ? "-" : next_payday;
 
-$("#view_133 form .kn-input.kn-input-section_break.control p.kn-description").replaceWith($("#view_133 form .kn-input.kn-input-section_break.control p.kn-description").html().replace("{payday_current}", payday).replace("{payday_next}", next_payday));
+$("#view_133 form .kn-input.kn-input-section_break.control").replaceWith($("#view_133 form .kn-input.kn-input-section_break.control").html().replace("{payday_current}", payday).replace("{payday_next}", next_payday));
 
 // Calculate Withdrawable Amount Variables
 var base_salary = parseFloat($("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, "") == "" ? 0 : $("#view_65 .field_44 .kn-detail-body").text().replace(/,/g, ""));
