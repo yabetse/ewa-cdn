@@ -83,7 +83,7 @@ function proceed_to_form() {
   $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_80").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 .kn-input-section_break").css({"visibility":"hidden", "position":"absolute"});
+  $("#view_133 form .kn-section-break").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"})
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"})
@@ -95,7 +95,7 @@ function back_from_form() {
   $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 .kn-input-section_break").css({"visibility":"unset", "position":"unset"});
+  $("#view_133 form .kn-section-break").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"})
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"})
