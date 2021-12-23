@@ -1,9 +1,9 @@
-hide_error = function () {
+function hide_error() {
   $(".error-message-custom").hide();
   // $(".validation-message-custom").hide();
 };
 
-calculate_withdrawable = function (base_salary, requested_amount, withdrawable_threshold) {
+function calculate_withdrawable (base_salary, requested_amount, withdrawable_threshold) {
   var current_date = new Date();
   var mtd = current_date.getDate() - 1;
   var tot = new Date(current_date.getFullYear(), current_date.getMonth() + 1, 0).getDate();
@@ -49,7 +49,7 @@ amount_requested_checks = function (base_salary, employed_since_days, withdrawab
   }
 };
 
-display_message = function (json_obj) {
+function display_message (json_obj) {
   if (json_obj["status"] == false) {
     var error_msg = json_obj["error"];
     $(".error-message-custom").hide();
