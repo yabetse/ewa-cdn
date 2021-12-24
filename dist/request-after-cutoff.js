@@ -89,29 +89,31 @@ $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="butt
 $("#buttons-wrapper").prepend("<button id='back-cutoff-btn'>Back</button>");
 $("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' disabled>Proceed</button>");
 
-$("#view_133 #next-cutoff-btn").on('click', function() {
+proceed_to_from = function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_80").css({"visibility":"unset", "position":"unset"});
   $("#view_133 form .kn-section-break").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
-  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"})
-  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"})
-  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"unset"})
-})
+  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"});
+  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"});
+  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"unset"});
+}
+$("#view_133 #next-cutoff-btn").on("click", proceed_to_from);
 
-$("#view_133 #back-cutoff-btn").on('click', function() {
+back_to_conditions = function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_80").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 form .kn-section-break").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
-  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"})
-  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"})
-  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"none"})
-})
+  $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"});
+  $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"});
+  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"none"});
+}
+$("#view_133 #back-cutoff-btn").on("click", back_to_conditions);
 
 // Add placeholders + classes to the form view (view_133)
 
