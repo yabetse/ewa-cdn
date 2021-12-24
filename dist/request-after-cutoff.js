@@ -87,7 +87,7 @@ $("#view_133-field_119").change(function () {
 $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
 
 $("#buttons-wrapper").prepend("<button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>");
-$("#buttons-wrapper").prepend("<button id='next-cutoff-btn' onclick='proceed_to_form() disabled'>Proceed</button>");
+$("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' onclick='proceed_to_form() disabled'>Proceed</button>");
 
 function proceed_to_form() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
