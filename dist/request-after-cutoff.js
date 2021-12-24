@@ -43,7 +43,7 @@ amount_requested_checks = function (base_salary, employed_since_days, withdrawab
   } else if (cond3 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
-    return {status: false, error: "You are employed since " + employed_since_days + " days. You need to fulfill 120 days to be eligible to submit requests after cutiff days"};
+    return {status: false, error: "You are employed since " + employed_since_days + " days. You need to fulfill 120 days to be eligible to submit requests after cutoff days"};
   } else {
     return { status: true };
   }
