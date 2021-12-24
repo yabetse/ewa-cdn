@@ -186,7 +186,7 @@ $(document).on("knack-form-submit.view_133", function (event, view, record) {
 });
 
 // Disable the Submission Button
-$("#view_133 .kn-button.is-primary").prop("disabled", true);
+// $("#view_133 .kn-button.is-primary").prop("disabled", true);
 
 // Variables for Global Conditions
 var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));
