@@ -35,7 +35,7 @@ amount_requested_checks = function (base_salary, employed_since_days, withdrawab
 
   // compiling all
   if (cond1 == false) {
-    return {status: false, error: "You are employed since " + employed_since_days + " days. You need to fulfill 120 days to be eligible to submit requests after cutoff days"};
+    return {status: false, error: "You are employed since " + employed_since_days + " days. You need to fulfill 4 months at least to be eligible to submit requests after cutoff days"};
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
   } else if (cond3 == false) {
@@ -168,7 +168,7 @@ $('.view_133 form .kn-input .kn-radio .control').each(function () {
     var speed_type = "cutoff";
   }
 
-  let newContentTemplate = `
+  var newContentTemplate = `
       <div class='${speed_type}'>
           <span class='widthdrawl-radio'>
               <span class='wr-title'>${radioContentText[0]}</span>
