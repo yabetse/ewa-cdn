@@ -72,8 +72,8 @@ function display_message (json_obj) {
 
 $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
 
-$("<button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>").append($("#buttons-wrapper"));
-$("<button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>").append($("#buttons-wrapper"));
+$("#buttons-wrapper").append("<button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>");
+$("#buttons-wrapper").append("<button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>");
 
 function proceed_to_form() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
