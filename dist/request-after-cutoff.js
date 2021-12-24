@@ -89,7 +89,7 @@ $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="butt
 $("#buttons-wrapper").prepend("<button id='back-cutoff-btn'>Back</button>");
 $("#buttons-wrapper").prepend("<button id='next-cutoff-btn' class='disabled' disabled>Proceed</button>");
 
-$("#view_133 #next-cutoff-btn").click(function() {
+$("#view_133 #next-cutoff-btn").on('click', function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_59").css({"visibility":"unset", "position":"unset"});
   $("#view_133 #kn-input-field_92").css({"visibility":"unset", "position":"unset"});
@@ -101,7 +101,7 @@ $("#view_133 #next-cutoff-btn").click(function() {
   $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"unset"})
 })
 
-$("#view_133 #back-cutoff-btn").click(function() {
+$("#view_133 #back-cutoff-btn").on('click', function() {
   $("#view_133 #kn-input-field_18").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_59").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 #kn-input-field_92").css({"visibility":"hidden", "position":"absolute"});
