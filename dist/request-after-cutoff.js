@@ -68,12 +68,26 @@ function display_message (json_obj) {
   }
 };
 
+// Function that updates the proceed button state on jsignature field change
+
+
+$("#view_133-field_119").change(function () {
+  var base30Data = $("#view_133-field_119").jSignature('getData','base30')[1];
+  if (base30Data.trim() == "") {
+    $('#next-cutoff-btn').prop("disabled", true);
+    $('#next-cutoff-btn').addClass("disabled");
+  } else {
+    $('#next-cutoff-btn').prop("disabled", false);
+    $('#next-cutoff-btn').removeClass("disabled");
+  }
+});
+
 // Append a "Proceed" button to the form
 
 $("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
 
 $("#buttons-wrapper").prepend("<button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>");
-$("#buttons-wrapper").prepend("<button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>");
+$("#buttons-wrapper").prepend("<button id='next-cutoff-btn' onclick='proceed_to_form() disabled'>Proceed</button>");
 
 function proceed_to_form() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
