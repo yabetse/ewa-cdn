@@ -17,33 +17,33 @@ amount_requested_checks = function (base_salary, employed_since_days, withdrawab
   var arr = [withdrawable_amount, max_allowed, max_cutoff_allowed, base_salary*0.1];
   var max_allowed_bis = Math.min.apply(null, arr.filter(Boolean));
   
+  // condition1: employee employed for 4 months or more
+  var cond1 = employed_since_days >= 120;
+  
   // condition1: total number of requests per month
-  var cond1 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
+  var cond2 = max_nb_requests <= 0 || nb_requests < max_nb_requests;
 
   // condition2: remaining balance is lower than the minimum withdrawal amount allowed
   if (max_allowed_bis < min_allowed) {
-    var cond2 = false;
+    var cond3 = false;
   } else {
-    var cond2 = true;
+    var cond3 = true;
   }
 
   // condition3: input in range
-  var cond3 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis;
-
-  // condition4: employee employed for 4 months or more
-  var cond4 = employed_since_days >= 120;
+  var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= max_allowed_bis;
 
   // compiling all
   if (cond1 == false) {
-    return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
-  } else if (cond2 == false) {
-    return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
-  } else if (cond3 == false && max_allowed > 0) {
-    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond3 == false) {
-    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
-  } else if (cond4 == false) {
     return {status: false, error: "You are employed since " + employed_since_days + " days. You need to fulfill 120 days to be eligible to submit requests after cutoff days"};
+  } else if (cond2 == false) {
+    return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
+  } else if (cond3 == false) {
+    return {status: false, error: "The remaining balance (" + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ") is lower than the minimum withdrawal amount allowed (" + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ")"};
+  } else if (cond4 == false && max_allowed > 0) {
+    return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond4 == false) {
+    return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else {
     return { status: true };
   }
