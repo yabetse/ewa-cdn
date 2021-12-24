@@ -62,21 +62,18 @@ function display_message (json_obj) {
     $(".error-message-custom").hide();
     $(".validation-message-custom").hide();
     $("<div class='validation-message-custom'><strong>All inputs are correct</strong></div>").insertBefore($("#view_133 form > ul"));
-    $("#view_133 #submit-cutoff-btn").prop("disabled", false);
+    $("#view_133 .kn-button.is-primary").prop("disabled", false);
   } else {
-    $("#view_133 #submit-cutoff-btn").prop("disabled", true);
+    $("#view_133 .kn-button.is-primary").prop("disabled", true);
   }
 };
 
 // Append a "Proceed" button to the form
 
-var buttons_html = `<div class="buttons-wrapper">
-                        <button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>
-                        <button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>
-                        <button id='submit-cutoff-btn' onclick='submit_cutoff_form()'>Submit</button>
-                    </div>`;
+$("#view_133 .kn-button.is-primary").wrap('<div id="buttons-wrapper" class="buttons-wrapper"></div>');
 
-$(buttons_html).insertAfter("#view_133 #kn-input-field_80");
+$("<button id='next-cutoff-btn' onclick='proceed_to_form()'>Proceed</button>").append("#buttons-wrapper");
+$("<button id='back-cutoff-btn' onclick='back_from_form()'>Back</button>").append("#buttons-wrapper");
 
 function proceed_to_form() {
   $("#view_133 #kn-input-field_18").css({"visibility":"unset", "position":"unset"});
@@ -87,7 +84,7 @@ function proceed_to_form() {
   $("#view_133 #kn-input-field_119").css({"visibility":"hidden", "position":"absolute"});
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"none"})
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"unset"})
-  $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"unset"})
+  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"unset"})
 }
 
 function back_from_form() {
@@ -99,12 +96,12 @@ function back_from_form() {
   $("#view_133 #kn-input-field_119").css({"visibility":"unset", "position":"unset"});
   $("#view_133 .buttons-wrapper #next-cutoff-btn").css({"display":"unset"})
   $("#view_133 .buttons-wrapper #back-cutoff-btn").css({"display":"none"})
-  $("#view_133 .buttons-wrapper #submit-cutoff-btn").css({"display":"none"})
+  $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"none"})
 }
 
-function submit_cutoff_form() {
+/* function submit_cutoff_form() {
   $('#view_133 .kn-submit button').click();
-}
+} */
 
 // Add placeholders + classes to the form view (view_133)
 
@@ -185,7 +182,7 @@ $(document).on("knack-form-submit.view_133", function (event, view, record) {
 });
 
 // Disable the Submission Button
-$("#view_133 #submit-cutoff-btn").prop("disabled", true);
+$("#view_133 .kn-button.is-primary").prop("disabled", true);
 
 // Variables for Global Conditions
 var requested_transactions = parseInt($("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, "") == "" ? 0 : $("#view_66 .kn-pivot-calc:eq(1)").text().replace(/,/g, ""));

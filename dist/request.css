@@ -9,7 +9,7 @@
 
 #view_133 .kn-submit,
 #view_133 .buttons-wrapper #back-cutoff-btn,
-#view_133 .buttons-wrapper #submit-cutoff-btn {
+#view_133 .buttons-wrapper .kn-button.is-primary {
   display: none;
 }
 
@@ -278,7 +278,7 @@
   margin-right: 4%;
 }
 
-#view_133 #submit-cutoff-btn {
+#view_133 .kn-button.is-primary {
   background: #8E4842;
   border: none;
   border-radius: 6px;
