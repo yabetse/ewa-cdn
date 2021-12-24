@@ -99,10 +99,6 @@ function back_from_form() {
   $("#view_133 .buttons-wrapper .kn-button.is-primary").css({"display":"none"})
 }
 
-/* function submit_cutoff_form() {
-  $('#view_133 .kn-submit button').click();
-} */
-
 // Add placeholders + classes to the form view (view_133)
 
 ($('.view_133 form #field_18').attr("placeholder", "Amount"));

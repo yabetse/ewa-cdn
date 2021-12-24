@@ -12,6 +12,10 @@
   display: none;
 }
 
+#view_133 .buttons-wrapper .kn-button.is-primary {
+  margin: 0 !important;
+}
+
 #view_105 #kn-input-field_92 div.kn-radio .control:nth-child(3) {
   display: none;
 }
@@ -283,7 +287,6 @@
   border-radius: 6px;
   width: 45%;
   color: #FFFFFF;
-  padding: 14px 12px;
   font-size: 16px;
   font-weight: normal;
   margin-left: 4%;
