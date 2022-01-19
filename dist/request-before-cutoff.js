@@ -270,7 +270,7 @@ $("input#field_18").on("input", function (e) {
 });
 
 $("#view_105 #kn-input-field_126 input").change(function () {
-  var input_val = $(this).val();
+  var input_val = $("#field_18").val();
   var speed = $('input[name="view_105-field_92"]:checked').val();
   if (speed.toLowerCase().indexOf("normal") > -1) {
     withdrawal_fee = normal_fee_setting;
