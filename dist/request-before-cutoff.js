@@ -47,9 +47,7 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
   }
 
   // compiling all
-  if (cond5 == false) {
-    return {status: false, error: "Please agree to the Terms & Conditions to proceed"};
-  } else if (cond1 == false) {
+  if (cond1 == false) {
     return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
@@ -59,6 +57,8 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     return {status: false, error: "Please provide an amount between " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " and " + (Math.round(max_allowed_bis*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
   } else if (cond4 == false) {
     return {status: false, error: "Please provide an amount greater than " + (Math.round(min_allowed*100)/100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")};
+  } else if (cond5 == false) {
+    return {status: false, error: "Please agree to the Terms & Conditions to proceed"};
   } else {
     return { status: true };
   }
