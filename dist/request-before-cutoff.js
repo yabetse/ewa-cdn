@@ -270,6 +270,16 @@ $("input#field_18").on("input", function (e) {
 });
 
 $("#view_105 #kn-input-field_126 input").change(function () {
+  var input_val = $(this).val();
+  var speed = $('input[name="view_105-field_92"]:checked').val();
+  if (speed.toLowerCase().indexOf("normal") > -1) {
+    withdrawal_fee = normal_fee_setting;
+  } else if (speed.toLowerCase().indexOf("fast") > -1) {
+    withdrawal_fee = fast_fee_setting;
+  } else if (speed.toLowerCase().indexOf("cutoff") > -1) {
+    withdrawal_fee = cutoff_fee_setting;
+  }
+  available_amount = calculate_withdrawable(base_salary, requested_amount, withdrawable_threshold);
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 })
