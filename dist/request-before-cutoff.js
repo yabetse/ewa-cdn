@@ -39,8 +39,17 @@ amount_requested_checks = function (withdrawable_amount, min_allowed, max_allowe
     var cond4 = input_val > 0 && input_val >= min_allowed && input_val <= withdrawable_amount;
   }
 
+  // condition5: T&C checkbox
+  if($("#view_105 #kn-input-field_126 input").is(":checked")) {
+    var cond5 = true;
+  } else {
+    var cond5 = false;
+  }
+
   // compiling all
-  if (cond1 == false) {
+  if (cond5 == false) {
+    return {status: false, error: "Please agree to the Terms & Conditions to proceed"};
+  } else if (cond1 == false) {
     return {status: false, error: "Please wait until next month to submit new requests"};
   } else if (cond2 == false) {
     return {status: false, error: "You have exceeded the maximum number of requests allowed per month"};
@@ -259,3 +268,8 @@ $("input#field_18").on("input", function (e) {
   var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
   display_message(output);
 });
+
+$("#view_105 #kn-input-field_126 input").change(function () {
+  var output = amount_requested_checks(available_amount, min_allowed, max_allowed, cutoff_day, requested_transactions, max_number_requests, input_val);
+  display_message(output);
+})

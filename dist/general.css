@@ -237,3 +237,44 @@ header#kn-app-header .kn-container .kn-mobile-controls {
 .mobile-nav ul li.is-active a {
   color: #fff;
 }
+
+/* terms & policies */
+
+.terms-policies {
+  width: 100%;
+  margin: 24px auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0px;
+  border-top: 1px solid #ddd;
+}
+
+.tp-content {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tp-content .tp-link {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none !important;
+  color: #999;
+  flex-grow: 1;
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+  font-size: 11.5px;
+  line-height: 14px;
+  cursor: pointer;
+  margin: 8px 2px;
+}
+
+.tp-content .tp-link:hover {
+  color: #7F3E3B;
+  font-weight: 600;
+}

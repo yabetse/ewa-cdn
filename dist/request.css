@@ -321,3 +321,11 @@
   color: #000000;
   font-weight: 500;
 }
+
+#view_105 #kn-input-field_126 > label {
+  display: none;
+}
+
+#view_105 #kn-input-field_126 .control label {
+  font-size: 13px !important;
+}
